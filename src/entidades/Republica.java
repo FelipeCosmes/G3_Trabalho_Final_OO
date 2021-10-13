@@ -19,9 +19,13 @@ public class Republica {
 		return listaPessoas;
 	}
 	
-	public void cadastroPessoa (String nome, String email, float renda) {
-		listaPessoas.add(new Pessoa(nome, email, renda, this));
-	}
+	public void cadastroPessoa () {
+        	String nome = JOptionPane.showInputDialog("Nome: ");
+        	String email = JOptionPane.showInputDialog("Email: ");
+        	String strRenda = JOptionPane.showInputDialog("Renda: ");
+        	float renda = Float.parseFloat(strRenda);
+        	listaPessoas.add(new Pessoa(nome, email, renda, this));
+    }
 	
 	public void excluirPessoa (Pessoa pessoa) {
 		listaPessoas.remove(pessoa);
