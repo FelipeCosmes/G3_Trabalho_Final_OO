@@ -1,22 +1,20 @@
 package entidades;
 
-import entidades.Categoria;
-
 public class Despesa {
 	
-	String descrição;
-	Categoria categoria; //só pra preencher o getCategoria
+	String descricao;
+	Categoria categoria;
 	float valor;
 	
-	public Despesa (String descrição, float valor, Categoria categoria) {
-		this.descrição = descrição;
+	public Despesa (String descricao, float valor, Categoria categoria) {
+		this.descricao = descricao;
 		this.valor = valor;
 		this.categoria = categoria;
 	}
 	
-	public String getDescrição() {
+	public String getDescricao() {
 
-		return descrição;
+		return descricao;
 	}
 	
 	public float getValor() {

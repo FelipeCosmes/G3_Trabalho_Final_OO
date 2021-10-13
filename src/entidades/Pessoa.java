@@ -2,34 +2,40 @@ package entidades;
 
 public class Pessoa {
 	
-	String nome;
-	String email;
-	float renda;
+	private String nome;
+	private String email;
+	private float renda;
 	
-	public Pessoa (String nome, String email, float renda) {
+	private Republica republica;
+	
+	public Pessoa (String nome, String email, float renda, Republica republica) {
 		this.nome = nome;
 		this.email = email;
 		this.renda = renda;
+		this.republica = republica;
 	}
 	
 	public String getNome() {
-
 		return nome;
 	}
 	
 	public String getEmail() {
-
 		return email;
 	}
 	
 	public float getRenda() {
-		
 		return renda;
 	}
 	
-	public float Divida() {
-		
-		return renda;
+	public void setRenda(float renda) {
+		this.renda = renda;
 	}
-
+	
+	public float divida() {
+		if (!republica.getDivisaoProporcional()) {
+			return republica.despesaTotal() / republica.getListaPessoas().size();
+		} else {
+			return republica.despesaTotal() * renda / republica.rendaTotal();
+		}
+	}
 }
