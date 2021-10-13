@@ -2,14 +2,15 @@ package entidades;
 
 public class SubCategoria extends Categoria {
 	
+	private Categoria superCategoria;
 	
-	public SubCategoria (String nome, String subnome) {
+	public SubCategoria (String nome, Categoria superCategoria) {
 		super(nome);
-
+		this.superCategoria = superCategoria;
 	}
 	
-	public String getCategoria() {
-		return nome;
+	public Categoria getCategoria() {
+		return superCategoria;
 	}
 
 }
