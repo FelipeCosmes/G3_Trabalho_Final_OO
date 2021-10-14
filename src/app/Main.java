@@ -37,7 +37,8 @@ public class Main {
                     break;
 
                 case 3:
-                    // republica.excluirPessoa();
+                    String nome = JOptionPane.showInputDialog(null,"Nome do cadastro que deseja remover: ");
+                    republica.excluirPessoa(nome);
                     break;
 
                 case 4:
