@@ -13,16 +13,16 @@ public class Main {
         Despesa despesa = new Despesa();
         Republica republica = new Republica();
 
-
         int opcao = 0;
+        Data();
         do {
-            String menu = "Informe a opcao desejada: \n"
-                    + "1 - Cadastrar pessoa \n"
-                    + "2 - Excluir pessoa \n"
-                    + "3 - Calcular Divida \n"
-                    + "4 - Cadastrar despesa \n"
-                    + "5 - Excluir despesa \n"
-                    + "0 - Sair";
+            String menu = "Informe a opcao desejada: \n" 
+                        + "1 - Cadastrar pessoa \n" 
+                        + "2 - Cadastrar despesa \n"
+                        + "3 - Excluir pessoa \n" 
+                        + "4 - Excluir despesa \n" 
+                        + "5 - Calcular Divida \n"
+                        + "0 - Sair";
 
             String strOpcao = JOptionPane.showInputDialog(menu);
             opcao = Integer.parseInt(strOpcao);
@@ -32,22 +32,22 @@ public class Main {
                     republica.cadastroPessoa();
                     break;
 
-//                case 2:
-//                    republica.cadastroDespesa();
-//                    break;
-
-                case 3:
-                    String divida = Float.toString(pessoa.divida());
-                    JOptionPane.showMessageDialog(null, divida);
+                case 2:
+                    republica.cadastroDespesa();
                     break;
 
-//                case 4:
-//                    republica.excluirPessoa();
-//                    break;
-//
-//                case 5:
-//                    republica.excluirDespesa();
+                case 3:
+                    // republica.excluirPessoa();
+                    break;
 
+                case 4:
+                    // republica.excluirDespesa();
+                    break;
+
+                case 5:
+                    String divida = Float.toString(pessoa.divida());
+                    JOptionPane.showMessageDialog(null, divida);
+                    
                 case 0:
                     break;
 
@@ -57,6 +57,10 @@ public class Main {
             }
         } while (opcao != 0);
 
+    }
 
+    public static void Data(){
+        String strMes = JOptionPane.showInputDialog("Mês do cadastro: ");
+        String strAno = JOptionPane.showInputDialog("Ano do cadastro: ");
     }
 }
