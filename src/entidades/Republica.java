@@ -18,7 +18,7 @@ public class Republica {
 		divisaoProporcional = false;
 	}
 
-	public List<Pessoa> getListaPessoas() {
+	public List<Pessoa> getListPessoas() {
 		return listaPessoas;
 	}
 
@@ -41,8 +41,19 @@ public class Republica {
 		listaDespesas.add(new Despesa(descricao, valor, categoria));
 	}
 
-	public void excluirPessoa(Pessoa pessoa) {
-		listaPessoas.remove(pessoa);
+	public void excluirPessoa(String nome) {
+		Pessoa resp = null;
+		for(Pessoa p : listaPessoas){
+			if (p.getNome().equalsIgnoreCase(nome)){
+				resp = p;
+				JOptionPane.showMessageDialog(null, "Cadastro de " + resp.getNome() + " removido");
+				break;
+			}
+		}
+		if(resp==null){
+			JOptionPane.showMessageDialog(null, "Cadastro não encontrado!");
+		}
+		listaPessoas.remove(resp);
 	}
 
 	public List<Despesa> getListaDespesas() {
@@ -78,3 +89,4 @@ public class Republica {
 	}
 
 }
+
