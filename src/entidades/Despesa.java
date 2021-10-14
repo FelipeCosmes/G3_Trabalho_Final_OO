@@ -11,7 +11,11 @@ public class Despesa {
 		this.valor = valor;
 		this.categoria = categoria;
 	}
-	
+
+	public Despesa(){
+		
+	}
+
 	public String getDescricao() {
 
 		return descricao;
