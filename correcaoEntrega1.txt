@@ -1,0 +1,41 @@
+Pontos positivos: 
+
++ Apresentada a relação de classes de Exceção
+
+
+
+
+Pontos negativos: 
+
+- Não há indĩcios de onde são realizados os cálculos de despesas pelas regras
+  igualitaria e propocional. (-10%)
+- Uso de associações do tipo composição e agregação quando, na verdade,
+  associações direcionais é que deveriam ser utilizadas. (-20%)
+- Onde está o atributo de cálculo igualitario (tal qual divisaoProporcional em
+  Republica)? (-10%)
+
+
+
+
+Dúvidas: 
+
+? O que significa o método dívida() em Pessoa?
+? O que significa o atributo republica em Pessoa?
+
+
+
+Comentários: 
+
+Parece faltar uma série de classes, atributos e métodos para que a aplicação
+atenda ao que foi solicitado no enunciado do exercício. Por exemplo, no estado
+atual, não é possivel ver onde são feitos os calculos de divisão de despesas
+pela regras igualitaria e proporcional. Sugestão é que deixe explicitos os
+locais em que tais calculos sao realizados, inclusive com herança. Necessário
+mais esforço do grupo sobre o trabalho para que os objetivos dele sejam
+cumpridos.
+
+
+
+
+Nota: 
+60/100 pontos.
