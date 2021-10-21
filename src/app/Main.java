@@ -48,16 +48,8 @@ public class Main {
                     break;
 
                 case 5:
-                    String strDividaProp = JOptionPane.showInputDialog(null, "0 se quiser proporcional e 1 se quiser comunismo:");
-                    dividaProp = Integer.parseInt(strDividaProp);
-                    if(dividaProp == 0){
-                        republica.setDivisaoProporcional(false);
-                    }
-                    else {
-                        republica.setDivisaoProporcional(true);
-                    }
-                    String divida = Float.toString(pessoa.divida());
-                    JOptionPane.showMessageDialog(null, divida);
+                Object[] divisao = {"Igualitária","Proporcional"};
+                Object tipoDiv= JOptionPane.showInputDialog(null, "Forma de divisão para as despesas:", "Divisão de despesa", JOptionPane.INFORMATION_MESSAGE,null,divisao,divisao[0]);
                     break;
                     
                 case 0:
