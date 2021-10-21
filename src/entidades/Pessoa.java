@@ -15,6 +15,10 @@ public class Pessoa {
 		this.republica = republica;
 	}
 	
+	public Pessoa() {
+		
+	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -33,7 +37,7 @@ public class Pessoa {
 	
 	public float divida() {
 		if (!republica.getDivisaoProporcional()) {
-			return republica.despesaTotal() / republica.getListaPessoas().size();
+			return republica.despesaTotal() / republica.getListPessoas().size();
 		} else {
 			return republica.despesaTotal() * renda / republica.rendaTotal();
 		}

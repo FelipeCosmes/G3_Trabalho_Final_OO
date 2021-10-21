@@ -31,7 +31,7 @@ public class Republica {
 	}
 
 	public void cadastroDespesa() {
-		String descricao = JOptionPane.showInputDialog("Descrição: ");
+		String descricao = JOptionPane.showInputDialog("Descricao: ");
 		String strCat = JOptionPane.showInputDialog("Categoria: ");
 		Categoria categoria = new Categoria(strCat);
 		String strValor = JOptionPane.showInputDialog("Valor: ");
@@ -51,7 +51,7 @@ public class Republica {
 			}
 		}
 		if(resp==null){
-			JOptionPane.showMessageDialog(null, "Cadastro não encontrado!");
+			JOptionPane.showMessageDialog(null, "Cadastro nao encontrado!");
 		}
 		listaPessoas.remove(resp);
 	}
@@ -60,8 +60,19 @@ public class Republica {
 		return listaDespesas;
 	}
 
-	public void excluirDespesa(Despesa despesa) {
-		listaDespesas.remove(despesa);
+	public void excluirDespesa(String despesa) {
+		Despesa desp = null;
+		for (Despesa p : listaDespesas) {
+			if(p.getDescricao().equalsIgnoreCase(despesa)) {
+				desp = p;
+				JOptionPane.showMessageDialog(null, "Cadastro de " + desp.getDescricao() + " removido");
+				break;
+			}
+		}
+			if(desp == null){
+				JOptionPane.showMessageDialog(null, "Cadastro nao encontrado!");
+		}
+		listaDespesas.remove(desp);
 	}
 
 	public boolean getDivisaoProporcional() {

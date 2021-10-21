@@ -14,6 +14,7 @@ public class Main {
         Republica republica = new Republica();
 
         int opcao = 0;
+        int dividaProp;
         Data();
         do {
             String menu = "Informe a opcao desejada: \n" 
@@ -42,18 +43,28 @@ public class Main {
                     break;
 
                 case 4:
-                    // republica.excluirDespesa();
+                    String nomeDespesa = JOptionPane.showInputDialog(null,"Despesa do cadastro que deseja remover: ");
+                    republica.excluirDespesa(nomeDespesa);
                     break;
 
                 case 5:
+                    String strDividaProp = JOptionPane.showInputDialog(null, "0 se quiser proporcional e 1 se quiser comunismo:");
+                    dividaProp = Integer.parseInt(strDividaProp);
+                    if(dividaProp == 0){
+                        republica.setDivisaoProporcional(false);
+                    }
+                    else {
+                        republica.setDivisaoProporcional(true);
+                    }
                     String divida = Float.toString(pessoa.divida());
                     JOptionPane.showMessageDialog(null, divida);
+                    break;
                     
                 case 0:
                     break;
 
                 default:
-                    JOptionPane.showMessageDialog(null, "Opção Inválida!");
+                    JOptionPane.showMessageDialog(null, "Opção Inválida!", "ATENÇÃO!", JOptionPane.WARNING_MESSAGE);
                     break;
             }
         } while (opcao != 0);
