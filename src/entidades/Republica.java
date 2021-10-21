@@ -99,5 +99,23 @@ public class Republica {
 		return total;
 	}
 
+	public void calcularDiv(Object tipo){
+		
+		String nome="";
+		
+		if(tipo.equals("Igualitária")){
+			float divida = despesaTotal()/getListPessoas().size();
+			for(Pessoa p:listaPessoas){
+				nome+=String.format("%s: R$ %.2f\n", p.getNome(),divida);
+			}
+		}
+		else{
+			for(Pessoa p:listaPessoas){
+				nome+=String.format("%s: R$ %.2f\n", p.getNome(),despesaTotal()*p.getRenda() / rendaTotal());
+			}
+		}
+		JOptionPane.showMessageDialog(null, nome,"Dívida de cada pessoa", JOptionPane.INFORMATION_MESSAGE);
+	}
+
 }
 
