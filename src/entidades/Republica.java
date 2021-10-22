@@ -18,6 +18,8 @@ public class Republica {
 	private List<Despesa> listaDespesas;
 	//private CalculoDivida calculoDivida;
 	private String nomeArquivoPessoa = "alunos.txt";
+	private String strMes;
+	private String strAno;
 	
 
 	public Republica() {
@@ -27,16 +29,47 @@ public class Republica {
 		calculoDivida.despesaTotal(listaDespesas); */
 	}
 
+	//-----Cadastro de Data
+
 	public String data(){
-
-		String strMes = JOptionPane.showInputDialog("Mês do cadastro: ");
-		String strAno = JOptionPane.showInputDialog("Ano do cadastro: ");
-
+		
+		setStrMes(JOptionPane.showInputDialog("Mês do cadastro: "));
+		setStrAno(JOptionPane.showInputDialog("Ano do cadastro: "));
+		
 		return "despesas_" + strMes + "_" + strAno + ".txt";
     }
 
-	public List<Pessoa> getListPessoas() {
-		return listaPessoas;
+	public String getData(){
+		return "despesas_" + strMes + "_" + strAno + ".txt";
+	}
+
+	//-----Leitura, Cadastro e Gravação de Pessoas
+	
+	public void lerPessoas() {
+		FileReader in = null;
+		BufferedReader buffer = null;
+		
+		try {
+			in = new FileReader(nomeArquivoPessoa);
+			buffer = new BufferedReader(in);
+			
+			String linha = null;
+			do {
+				linha = buffer.readLine();
+				
+				if (linha != null) {
+					String[] registro = linha.split(" ; ");
+					Pessoa a = new Pessoa(registro[0], registro[1], Float.parseFloat(registro[2]));
+					listaPessoas.add(a);
+				}
+			} while (linha != null);
+			
+			JOptionPane.showMessageDialog(null, "Registros de Pessoa carregados do arquivo");
+			buffer.close();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void cadastroPessoa() {
@@ -46,110 +79,29 @@ public class Republica {
 		float renda = Float.parseFloat(strRenda);
 		listaPessoas.add(new Pessoa(nome, email, renda));
 	}
-
+	
+	public List<Pessoa> getListPessoas() {
+		return listaPessoas;
+	}
+	
 	public void gravarPessoas() {
 		BufferedWriter buffer = null;
 		FileWriter out = null;
-
+		
 		try {
 			out = new FileWriter(nomeArquivoPessoa);
 			buffer = new BufferedWriter(out);
-
+			
 			for(Pessoa a : listaPessoas) {
 				buffer.write(a.toString());
 				buffer.write('\n');
 			}
-
+			
 			buffer.close();
 		} catch (IOException e) {
-
+			
 		}
 	}
-
-	public void lerPessoas() {
-		FileReader in = null;
-		BufferedReader buffer = null;
-
-		try {
-			in = new FileReader(nomeArquivoPessoa);
-			buffer = new BufferedReader(in);
-
-			String linha = null;
-			do {
-				linha = buffer.readLine();
-
-				if (linha != null) {
-					String[] registro = linha.split(" ; ");
-					Pessoa a = new Pessoa(registro[0], registro[1], Float.parseFloat(registro[2]));
-					listaPessoas.add(a);
-				}
-			} while (linha != null);
-
-			JOptionPane.showMessageDialog(null, "Registros de Pessoa carregados do arquivo");
-			buffer.close();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void cadastroDespesa() {
-		String descricao = JOptionPane.showInputDialog("Descricao: ");
-		String strCat = JOptionPane.showInputDialog("Categoria: ");
-		Categoria categoria = new Categoria(strCat);
-		String strValor = JOptionPane.showInputDialog("Valor: ");
-		float valor = Float.parseFloat(strValor);
-		//String resp = JOptionPane.showInputDialog("Subcategoria: ");
-
-		listaDespesas.add(new Despesa(descricao, categoria, valor));
-	}
-
-	public void gravarDespesas() {
-		BufferedWriter buffer = null;
-		FileWriter out = null;
-
-		try {
-			out = new FileWriter(data());
-			buffer = new BufferedWriter(out);
-
-			for(Despesa a : listaDespesas) {
-				buffer.write(a.toString());
-				buffer.write('\n');
-			}
-
-			buffer.close();
-		} catch (IOException e) {
-
-		}
-	}
-
-	public void lerDespesas() {
-		FileReader in = null;
-		BufferedReader buffer = null;
-
-		try {
-			in = new FileReader(data());
-			buffer = new BufferedReader(in);
-
-			String linha = null;
-			do {
-				linha = buffer.readLine();
-
-				if (linha != null) {
-					String[] registro = linha.split(" ; ");
-					Despesa a = new Despesa(registro[0], new Categoria(registro[1]), Float.parseFloat(registro[2]));
-					listaDespesas.add(a);
-				}
-			} while (linha != null);
-
-			JOptionPane.showMessageDialog(null, "Registros de Despesa carregados do arquivo");
-			buffer.close();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
 	public void excluirPessoa(String nome) {
 		Pessoa resp = null;
 		for(Pessoa p : listaPessoas){
@@ -164,10 +116,71 @@ public class Republica {
 		}
 		listaPessoas.remove(resp);
 	}
+	
+	//-----Leitura, Cadastro, Gravação e Exclusão de Despesas
+	
+	public void lerDespesas() {
+		FileReader in = null;
+		BufferedReader buffer = null;
+		
+		try {
+			in = new FileReader(data());
+			buffer = new BufferedReader(in);
+			
+			String linha = null;
+			do {
+				linha = buffer.readLine();
+				
+				if (linha != null) {
+					String[] registro = linha.split(" ; ");
+					Despesa a = new Despesa();
+					a = new Despesa(registro[0], new Categoria(registro[1]), Float.parseFloat(registro[2]));
+					listaDespesas.add(a);
+				}
+			} while (linha != null);
+			
+			JOptionPane.showMessageDialog(null, "Registros de Despesa carregados do arquivo");
+			buffer.close();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void cadastroDespesa() {
+		String descricao = JOptionPane.showInputDialog("Descricao: ");
+		String strCat = JOptionPane.showInputDialog("Categoria: ");
+		Categoria categoria = new Categoria(strCat);
+		String strValor = JOptionPane.showInputDialog("Valor: ");
+		float valor = Float.parseFloat(strValor);
+		//String resp = JOptionPane.showInputDialog("Subcategoria: ");
+		
+		listaDespesas.add(new Despesa(descricao, categoria, valor));
+	}
 
 	public List<Despesa> getListaDespesas() {
 		return listaDespesas;
 	}
+	
+	public void gravarDespesas() {
+		BufferedWriter buffer = null;
+		FileWriter out = null;
+		
+		try {
+			out = new FileWriter(getData());
+			buffer = new BufferedWriter(out);
+			
+			for(Despesa a : listaDespesas) {
+				buffer.write(a.toString());
+				buffer.write('\n');
+			}
+			
+			buffer.close();
+		} catch (IOException e) {
+			
+		}
+	}
+
 
 	public void excluirDespesa(String despesa) {
 		Despesa desp = null;
@@ -178,12 +191,14 @@ public class Republica {
 				break;
 			}
 		}
-			if(desp == null){
-				JOptionPane.showMessageDialog(null, "Cadastro nao encontrado!");
+		if(desp == null){
+			JOptionPane.showMessageDialog(null, "Cadastro nao encontrado!");
 		}
 		listaDespesas.remove(desp);
 	}
 
+	//-------------------------------------------------------
+	
 	public float rendaTotal() {
 		float total = 0;
 		for (Pessoa pessoa : listaPessoas) {
@@ -191,13 +206,29 @@ public class Republica {
 		}
 		return total;
 	}
-
+	
     public float despesaTotal() {
 		float total = 0;
 		for (Despesa despesa : listaDespesas) {
 			total += despesa.getValor();
 		}
 		return total;
+	}
+
+	public String getStrAno() {
+		return strAno;
+	}
+	
+	public void setStrAno(String strAno) {
+		this.strAno = strAno;
+	}
+	
+	public String getStrMes() {
+		return strMes;
+	}
+	
+	public void setStrMes(String strMes) {
+		this.strMes = strMes;
 	}
 }
 

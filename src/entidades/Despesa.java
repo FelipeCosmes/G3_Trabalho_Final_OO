@@ -32,7 +32,7 @@ public class Despesa {
 
 	@Override
 	public String toString() {
-		return descricao + " ; " + getCategoria() + " ; " + valor;
+		return descricao + " ; " + getCategoria().getNome() + " ; " + valor;
 	}
 
 }
