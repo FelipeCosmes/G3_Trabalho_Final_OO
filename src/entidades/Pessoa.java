@@ -6,13 +6,10 @@ public class Pessoa {
 	private String email;
 	private float renda;
 	
-	private Republica republica;
-	
-	public Pessoa (String nome, String email, float renda, Republica republica) {
+	public Pessoa (String nome, String email, float renda) {
 		this.nome = nome;
 		this.email = email;
 		this.renda = renda;
-		this.republica = republica;
 	}
 	
 	public Pessoa() {
@@ -34,12 +31,10 @@ public class Pessoa {
 	public void setRenda(float renda) {
 		this.renda = renda;
 	}
-	
-	public float divida() {
-		if (!republica.getDivisaoProporcional()) {
-			return republica.despesaTotal() / republica.getListPessoas().size();
-		} else {
-			return republica.despesaTotal() * renda / republica.rendaTotal();
-		}
+
+	@Override
+	public String toString() {
+		return nome + " ; " + email + " ; " + renda;
 	}
+	
 }

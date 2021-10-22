@@ -6,7 +6,7 @@ public class Despesa {
 	Categoria categoria;
 	float valor;
 	
-	public Despesa (String descricao, float valor, Categoria categoria) {
+	public Despesa (String descricao, Categoria categoria, float valor) {
 		this.descricao = descricao;
 		this.valor = valor;
 		this.categoria = categoria;
@@ -28,6 +28,11 @@ public class Despesa {
 	
 	public Categoria getCategoria() {
 		return categoria;
+	}
+
+	@Override
+	public String toString() {
+		return descricao + " ; " + getCategoria() + " ; " + valor;
 	}
 
 }

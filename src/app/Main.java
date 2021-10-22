@@ -1,7 +1,6 @@
 package app;
 
-import entidades.Despesa;
-import entidades.Pessoa;
+import entidades.RegraIgualitaria;
 import entidades.Republica;
 
 import javax.swing.*;
@@ -9,14 +8,12 @@ import javax.swing.*;
 public class Main {
     public static void main(String[] args) {
 
-        Pessoa pessoa = new Pessoa();
-        Despesa despesa = new Despesa();
         Republica republica = new Republica();
+        RegraIgualitaria regraIgualitaria = new RegraIgualitaria();
 
         int opcao = 0;
-        Data();
         
-        try {
+        try { 
             do {
                 String menu = "Informe a opcao desejada: \n" 
                             + "1 - Cadastrar pessoa \n" 
@@ -31,11 +28,15 @@ public class Main {
     
                 switch (opcao) {
                     case 1:
+                        republica.lerPessoas();
                         republica.cadastroPessoa();
+                        republica.gravarPessoas();
                         break;
     
                     case 2:
+                        republica.lerDespesas();
                         republica.cadastroDespesa();
+                        republica.gravarDespesas();
                         break;
     
                     case 3:
@@ -49,9 +50,9 @@ public class Main {
                         break;
     
                     case 5:
-                    Object[] divisao = {"Igualitária","Proporcional"};
+                    /* Object[] divisao = {"Igualitária","Proporcional"};
                     Object tipoDiv= JOptionPane.showInputDialog(null, "Forma de divisão para as despesas:", "Divisão de despesa", JOptionPane.INFORMATION_MESSAGE,null,divisao,divisao[0]);
-                    republica.calcularDiv(tipoDiv);
+                    JOptionPane.showMessageDialog(null, regraIgualitaria.divIgual()); */
                     
                         break;
                         
@@ -67,11 +68,6 @@ public class Main {
             opcao = 0;
         }
         
-
     }
 
-    public static void Data(){
-        String strMes = JOptionPane.showInputDialog("Mês do cadastro: ");
-        String strAno = JOptionPane.showInputDialog("Ano do cadastro: ");
-    }
 }

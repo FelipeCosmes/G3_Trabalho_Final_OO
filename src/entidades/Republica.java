@@ -3,20 +3,37 @@ package entidades;
 import java.util.List;
 
 import javax.swing.JOptionPane;
+import javax.xml.crypto.Data;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Republica {
 
 	private List<Pessoa> listaPessoas;
 	private List<Despesa> listaDespesas;
-	private boolean divisaoProporcional;
+	//private CalculoDivida calculoDivida;
+	private String nomeArquivoPessoa = "alunos.txt";
+	
 
 	public Republica() {
 		listaPessoas = new ArrayList<>();
 		listaDespesas = new ArrayList<>();
-		divisaoProporcional = false;
+		/* calculoDivida.rendaTotal(listaPessoas);
+		calculoDivida.despesaTotal(listaDespesas); */
 	}
+
+	public String data(){
+
+		String strMes = JOptionPane.showInputDialog("Mês do cadastro: ");
+		String strAno = JOptionPane.showInputDialog("Ano do cadastro: ");
+
+		return "despesas_" + strMes + "_" + strAno + ".txt";
+    }
 
 	public List<Pessoa> getListPessoas() {
 		return listaPessoas;
@@ -27,7 +44,53 @@ public class Republica {
 		String email = JOptionPane.showInputDialog("Email: ");
 		String strRenda = JOptionPane.showInputDialog("Renda: ");
 		float renda = Float.parseFloat(strRenda);
-		listaPessoas.add(new Pessoa(nome, email, renda, this));
+		listaPessoas.add(new Pessoa(nome, email, renda));
+	}
+
+	public void gravarPessoas() {
+		BufferedWriter buffer = null;
+		FileWriter out = null;
+
+		try {
+			out = new FileWriter(nomeArquivoPessoa);
+			buffer = new BufferedWriter(out);
+
+			for(Pessoa a : listaPessoas) {
+				buffer.write(a.toString());
+				buffer.write('\n');
+			}
+
+			buffer.close();
+		} catch (IOException e) {
+
+		}
+	}
+
+	public void lerPessoas() {
+		FileReader in = null;
+		BufferedReader buffer = null;
+
+		try {
+			in = new FileReader(nomeArquivoPessoa);
+			buffer = new BufferedReader(in);
+
+			String linha = null;
+			do {
+				linha = buffer.readLine();
+
+				if (linha != null) {
+					String[] registro = linha.split(" ; ");
+					Pessoa a = new Pessoa(registro[0], registro[1], Float.parseFloat(registro[2]));
+					listaPessoas.add(a);
+				}
+			} while (linha != null);
+
+			JOptionPane.showMessageDialog(null, "Registros de Pessoa carregados do arquivo");
+			buffer.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void cadastroDespesa() {
@@ -38,7 +101,53 @@ public class Republica {
 		float valor = Float.parseFloat(strValor);
 		//String resp = JOptionPane.showInputDialog("Subcategoria: ");
 
-		listaDespesas.add(new Despesa(descricao, valor, categoria));
+		listaDespesas.add(new Despesa(descricao, categoria, valor));
+	}
+
+	public void gravarDespesas() {
+		BufferedWriter buffer = null;
+		FileWriter out = null;
+
+		try {
+			out = new FileWriter(data());
+			buffer = new BufferedWriter(out);
+
+			for(Despesa a : listaDespesas) {
+				buffer.write(a.toString());
+				buffer.write('\n');
+			}
+
+			buffer.close();
+		} catch (IOException e) {
+
+		}
+	}
+
+	public void lerDespesas() {
+		FileReader in = null;
+		BufferedReader buffer = null;
+
+		try {
+			in = new FileReader(data());
+			buffer = new BufferedReader(in);
+
+			String linha = null;
+			do {
+				linha = buffer.readLine();
+
+				if (linha != null) {
+					String[] registro = linha.split(" ; ");
+					Despesa a = new Despesa(registro[0], new Categoria(registro[1]), Float.parseFloat(registro[2]));
+					listaDespesas.add(a);
+				}
+			} while (linha != null);
+
+			JOptionPane.showMessageDialog(null, "Registros de Despesa carregados do arquivo");
+			buffer.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void excluirPessoa(String nome) {
@@ -75,14 +184,6 @@ public class Republica {
 		listaDespesas.remove(desp);
 	}
 
-	public boolean getDivisaoProporcional() {
-		return divisaoProporcional;
-	}
-
-	public void setDivisaoProporcional(boolean divisaoProporcional) {
-		this.divisaoProporcional = divisaoProporcional;
-	}
-
 	public float rendaTotal() {
 		float total = 0;
 		for (Pessoa pessoa : listaPessoas) {
@@ -91,31 +192,12 @@ public class Republica {
 		return total;
 	}
 
-	public float despesaTotal() {
+    public float despesaTotal() {
 		float total = 0;
 		for (Despesa despesa : listaDespesas) {
 			total += despesa.getValor();
 		}
 		return total;
 	}
-
-	public void calcularDiv(Object tipo){
-		
-		String nome="";
-		
-		if(tipo.equals("Igualitária")){
-			float divida = despesaTotal()/getListPessoas().size();
-			for(Pessoa p:listaPessoas){
-				nome+=String.format("%s: R$ %.2f\n", p.getNome(),divida);
-			}
-		}
-		else{
-			for(Pessoa p:listaPessoas){
-				nome+=String.format("%s: R$ %.2f\n", p.getNome(),despesaTotal()*p.getRenda() / rendaTotal());
-			}
-		}
-		JOptionPane.showMessageDialog(null, nome,"Dívida de cada pessoa", JOptionPane.INFORMATION_MESSAGE);
-	}
-
 }
 
