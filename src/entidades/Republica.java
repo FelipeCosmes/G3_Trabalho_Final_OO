@@ -39,7 +39,7 @@ public class Republica {
 
 	public String data() {
 
-		setStrMes(JOptionPane.showInputDialog("MÃªs do cadastro: "));
+		setStrMes(JOptionPane.showInputDialog("Mês do cadastro: "));
 		setStrAno(JOptionPane.showInputDialog("Ano do cadastro: "));
 
 		return "despesas_" + strMes + "_" + strAno + ".txt";
@@ -246,7 +246,9 @@ public class Republica {
 			if (valor <= 0) {
 				throw new ValorNaoInformadoException();
 			}
+
 			listaDespesas.add(new Despesa(descricao, categoria, valor));
+
 		} catch (CategoriaNaoInformadaException g) {
 			String msg = "categoria nao informada, tente novamente!!" + "\n" + g;
 			JOptionPane.showMessageDialog(null, msg);
@@ -287,8 +289,7 @@ public class Republica {
 		}
 	}
 
-	public void excluirDespesa(String descricao, String strCategoria, float valor) {
-		Categoria categoria = new Categoria(strCategoria);
+	public void excluirDespesa(String descricao) {
 		Despesa desp = null;
 		for (Despesa p : listaDespesas) {
 			if (p.getDescricao().equalsIgnoreCase(descricao)) {
@@ -313,7 +314,7 @@ public class Republica {
 			ArrayList<String> salvar = new ArrayList<>();
 
 			while (linha != null) {
-				if (linha.equals(descricao + " ; " + categoria.getNome() + " ; " + valor) == false) {
+				if (linha.equals(desp.getDescricao() + " ; " + desp.getCategoria().getNome() + " ; " + desp.getValor()) == false) {
 					salvar.add(linha);
 				}
 

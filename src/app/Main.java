@@ -1,5 +1,7 @@
 package app;
 
+import entidades.Despesa;
+import entidades.Pessoa;
 import entidades.RegraIgualitaria;
 import entidades.Republica;
 
@@ -55,11 +57,20 @@ public class Main {
                         break;
     
                     case 4:
-                        String descricao = JOptionPane.showInputDialog(null,"Despesa do cadastro que deseja remover: ");
+                        int j=0;
+                        String[] b = new String[republica.getListaDespesas().size()];
+                        for(Despesa despesa : republica.getListaDespesas()){
+                            b[j]=despesa.getDescricao();
+                            j++;
+                        }
+                        Object[] nomeDesp = b;
+                        Object despDel = JOptionPane.showInputDialog(null, "Despesa a ser excluida:", "Exclusao de Despesa", JOptionPane.INFORMATION_MESSAGE,null,nomeDesp,nomeDesp[0]);
+                        String strDesp = (String) despDel;
+                        /* String descricao = JOptionPane.showInputDialog(null,"Despesa do cadastro que deseja remover: ");
                         String strCategoria = JOptionPane.showInputDialog(null,"Categoria da despesa que deseja remover: ");
                         String strValor = JOptionPane.showInputDialog(null,"Valor da despesa que deseja remover: ");
-                        float valor = Float.parseFloat(strValor);
-                        republica.excluirDespesa(descricao, strCategoria, valor);
+                        float valor = Float.parseFloat(strValor); */
+                        republica.excluirDespesa(strDesp);
                         break;
     
                     case 5:
