@@ -11,11 +11,11 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-
+import exceptions.CategoriaNaoInformadaException;
 import exceptions.DadosPessoaisIncompletosException;
-
+import exceptions.DescricaoNaoInformadaException;
 import exceptions.RendimentoInvalidoException;
-
+import exceptions.ValorNaoInformadoException;
 
 public class Republica {
 
@@ -93,13 +93,15 @@ public class Republica {
 			if (email.isBlank()) {
 				throw new DadosPessoaisIncompletosException();
 			}
-			if (strRenda.isBlank()) {
+			if (strRenda.isEmpty()) {
 				throw new RendimentoInvalidoException();
 			}
 			if (renda <= 0) {
 				throw new RendimentoInvalidoException();
 			}
-			 listaPessoas.add(new Pessoa(nome, email, renda));
+			// depois de verificar se todos os parametros estao validos será add o
+			// listaPessoas.
+			listaPessoas.add(new Pessoa(nome, email, renda));
 
 		} catch (RendimentoInvalidoException d) {
 
@@ -226,10 +228,41 @@ public class Republica {
 		Categoria categoria = new Categoria(strCat);
 		String strValor = JOptionPane.showInputDialog("Valor: ");
 		float valor = Float.parseFloat(strValor);
-	
-		listaDespesas.add(new Despesa(descricao, categoria, valor));
-}
+		// String resp = JOptionPane.showInputDialog("Subcategoria: ");
+
+//		try{
+//			listaDespesas.add(new Despesa(descricao, categoria, valor));
+//			}
+//		}catch(CategoriaNaoInformadaException f) {
+//		
+//	}
+		try {
+			if (descricao.isBlank()) {
+				throw new DescricaoNaoInformadaException();
+			}
+			if (categoria.getNome().isBlank()) {
+				throw new CategoriaNaoInformadaException();
+			}
+			if (valor <= 0) {
+				throw new ValorNaoInformadoException();
+			}
+			listaDespesas.add(new Despesa(descricao, categoria, valor));
+		} catch (CategoriaNaoInformadaException g) {
+			String msg = "categoria nao informada, tente novamente!!" + "\n" + g;
+			JOptionPane.showMessageDialog(null, msg);
+			g.printStackTrace();
+		} catch (DescricaoNaoInformadaException g) {
+			String msg = "descrição nao informada, tente novamente!!" + "\n" + g;
+			JOptionPane.showMessageDialog(null, msg);
+			g.printStackTrace();
+		} catch (ValorNaoInformadoException h) {
+			String msg = "valor invalido ou nulo, insira um valor positivo!!" + "\n" + h;
+			JOptionPane.showMessageDialog(null, msg);
+			h.printStackTrace();
+		}
+
 		
+	}
 
 	public List<Despesa> getListaDespesas() {
 		return listaDespesas;
