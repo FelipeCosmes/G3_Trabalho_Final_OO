@@ -42,11 +42,16 @@ public class Main {
                         break;
     
                     case 3:
-                        String nome = JOptionPane.showInputDialog(null,"Nome do cadastro que deseja remover: ");
-                        String email = JOptionPane.showInputDialog(null,"Email do cadastro que deseja remover: ");
-                        String strRenda = JOptionPane.showInputDialog(null,"Renda do cadastro que deseja remover: ");
-                        Float renda = Float.parseFloat(strRenda);
-                        republica.excluirPessoa(nome, email, renda);
+                        int i=0;
+                        String[] a = new String[republica.getListPessoas().size()];
+                        for(Pessoa pessoa : republica.getListPessoas()){
+                            a[i]=pessoa.getNome();
+                            i++;
+                        }
+                        Object[] nomes = a;
+                        Object nomeDel = JOptionPane.showInputDialog(null, "Pessoa a ser excluida:", "Exclusao de pessoa", JOptionPane.INFORMATION_MESSAGE,null,nomes,nomes[0]);
+                        String strNome = (String) nomeDel;
+                        republica.excluirPessoa(strNome);
                         break;
     
                     case 4:
