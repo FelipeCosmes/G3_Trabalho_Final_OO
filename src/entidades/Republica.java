@@ -236,7 +236,7 @@ public class Republica {
 		}
 		listaDespesas.remove(desp);
 
-		// ----- Excluir de alunos.txt
+		// ----- Excluir de despesas_<Mes>_<Ano>.txt
 
 		File fil = new File("despesas_" + strMes + "_" + strAno + ".txt");
 
