@@ -140,16 +140,16 @@ public class Republica {
 		}
 	}
 
-	public void excluirPessoa(String nome, String email, float renda) {
+	public void excluirPessoa(String nome) {
 		Pessoa resp = null;
-		for (Pessoa p : listaPessoas) {
-			if (p.getNome().equalsIgnoreCase(nome)) {
+		for(Pessoa p : listaPessoas){
+			if (p.getNome().equalsIgnoreCase(nome)){
 				resp = p;
 				JOptionPane.showMessageDialog(null, "Cadastro de " + resp.getNome() + " removido");
 				break;
 			}
 		}
-		if (resp == null) {
+		if(resp==null){
 			JOptionPane.showMessageDialog(null, "Cadastro nao encontrado!");
 		}
 		listaPessoas.remove(resp);
@@ -165,7 +165,7 @@ public class Republica {
 			ArrayList<String> salvar = new ArrayList<>();
 
 			while (linha != null) {
-				if (linha.equals(nome + " ; " + email + " ; " + renda) == false) {
+				if (linha.equals(resp.getNome() + " ; " + resp.getEmail() + " ; " + resp.getRenda()) == false) {
 					salvar.add(linha);
 				}
 
@@ -188,7 +188,7 @@ public class Republica {
 			fw.close();
 
 		} catch (IOException e) {
-			// TODO: handle exception
+			//TODO: handle exception
 		}
 	}
 
