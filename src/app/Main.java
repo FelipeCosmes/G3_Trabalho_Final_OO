@@ -12,6 +12,8 @@ public class Main {
         RegraIgualitaria regraIgualitaria = new RegraIgualitaria();
 
         int opcao = 0;
+        republica.lerPessoas();
+        republica.lerDespesas();
         
         try { 
             do {
@@ -28,25 +30,31 @@ public class Main {
     
                 switch (opcao) {
                     case 1:
-                        republica.lerPessoas();
+                        
                         republica.cadastroPessoa();
                         republica.gravarPessoas();
                         break;
     
                     case 2:
-                        republica.lerDespesas();
+                        
                         republica.cadastroDespesa();
                         republica.gravarDespesas();
                         break;
     
                     case 3:
                         String nome = JOptionPane.showInputDialog(null,"Nome do cadastro que deseja remover: ");
-                        republica.excluirPessoa(nome);
+                        String email = JOptionPane.showInputDialog(null,"Email do cadastro que deseja remover: ");
+                        String strRenda = JOptionPane.showInputDialog(null,"Renda do cadastro que deseja remover: ");
+                        Float renda = Float.parseFloat(strRenda);
+                        republica.excluirPessoa(nome, email, renda);
                         break;
     
                     case 4:
-                        String nomeDespesa = JOptionPane.showInputDialog(null,"Despesa do cadastro que deseja remover: ");
-                        republica.excluirDespesa(nomeDespesa);
+                        String descricao = JOptionPane.showInputDialog(null,"Despesa do cadastro que deseja remover: ");
+                        String strCategoria = JOptionPane.showInputDialog(null,"Categoria da despesa que deseja remover: ");
+                        String strValor = JOptionPane.showInputDialog(null,"Valor da despesa que deseja remover: ");
+                        float valor = Float.parseFloat(strValor);
+                        republica.excluirDespesa(descricao, strCategoria, valor);
                         break;
     
                     case 5:

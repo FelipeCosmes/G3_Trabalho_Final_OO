@@ -7,6 +7,7 @@ import javax.xml.crypto.Data;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -102,7 +103,8 @@ public class Republica {
 			
 		}
 	}
-	public void excluirPessoa(String nome) {
+
+	public void excluirPessoa(String nome, String email, float renda) {
 		Pessoa resp = null;
 		for(Pessoa p : listaPessoas){
 			if (p.getNome().equalsIgnoreCase(nome)){
@@ -115,6 +117,43 @@ public class Republica {
 			JOptionPane.showMessageDialog(null, "Cadastro nao encontrado!");
 		}
 		listaPessoas.remove(resp);
+
+		// ----- Excluir de alunos.txt
+
+		File fil = new File("alunos.txt");
+
+		try {
+			FileReader fr = new FileReader(fil);
+			BufferedReader br = new BufferedReader(fr);
+			String linha = br.readLine();
+			ArrayList<String> salvar = new ArrayList<>();
+
+			while (linha != null) {
+				if (linha.equals(nome + " ; " + email + " ; " + renda) == false) {
+					salvar.add(linha);
+				}
+
+				linha = br.readLine();
+			}
+
+			br.close();
+			fr.close();
+			FileWriter fw2 = new FileWriter(fil, true);
+			fw2.close();
+
+			FileWriter fw = new FileWriter(fil);
+			BufferedWriter bw = new BufferedWriter(fw);
+
+			for (int i = 0; i < salvar.size(); i++) {
+				bw.write(salvar.get(i));
+				bw.newLine();
+			}
+			bw.close();
+			fw.close();
+
+		} catch (IOException e) {
+			//TODO: handle exception
+		}
 	}
 	
 	//-----Leitura, Cadastro, Gravação e Exclusão de Despesas
@@ -182,10 +221,11 @@ public class Republica {
 	}
 
 
-	public void excluirDespesa(String despesa) {
+	public void excluirDespesa(String descricao, String strCategoria, float valor) {
+		Categoria categoria = new Categoria(strCategoria);
 		Despesa desp = null;
 		for (Despesa p : listaDespesas) {
-			if(p.getDescricao().equalsIgnoreCase(despesa)) {
+			if(p.getDescricao().equalsIgnoreCase(descricao)) {
 				desp = p;
 				JOptionPane.showMessageDialog(null, "Cadastro de " + desp.getDescricao() + " removido");
 				break;
@@ -195,6 +235,43 @@ public class Republica {
 			JOptionPane.showMessageDialog(null, "Cadastro nao encontrado!");
 		}
 		listaDespesas.remove(desp);
+
+		// ----- Excluir de alunos.txt
+
+		File fil = new File("despesas_" + strMes + "_" + strAno + ".txt");
+
+		try {
+			FileReader fr = new FileReader(fil);
+			BufferedReader br = new BufferedReader(fr);
+			String linha = br.readLine();
+			ArrayList<String> salvar = new ArrayList<>();
+
+			while (linha != null) {
+				if (linha.equals(descricao + " ; " + categoria.getNome() + " ; " + valor) == false) {
+					salvar.add(linha);
+				}
+
+				linha = br.readLine();
+			}
+
+			br.close();
+			fr.close();
+			FileWriter fw2 = new FileWriter(fil, true);
+			fw2.close();
+
+			FileWriter fw = new FileWriter(fil);
+			BufferedWriter bw = new BufferedWriter(fw);
+
+			for (int i = 0; i < salvar.size(); i++) {
+				bw.write(salvar.get(i));
+				bw.newLine();
+			}
+			bw.close();
+			fw.close();
+
+		} catch (IOException e) {
+			//TODO: handle exception
+		}
 	}
 
 	//-------------------------------------------------------
