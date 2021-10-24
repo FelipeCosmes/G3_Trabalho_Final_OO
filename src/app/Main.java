@@ -3,7 +3,6 @@ package app;
 import entidades.Despesa;
 import entidades.Pessoa;
 import entidades.Republica;
-import servicos.RegraIgualitaria;
 
 import javax.swing.*;
 
@@ -11,7 +10,6 @@ public class Main {
     public static void main(String[] args) {
 
         Republica republica = new Republica();
-        RegraIgualitaria regraIgualitaria = new RegraIgualitaria();
 
         int opcao = 0;
         republica.lerPessoas();

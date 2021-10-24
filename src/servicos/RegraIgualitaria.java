@@ -3,15 +3,13 @@ package servicos;
 import entidades.Republica;
 
 public class RegraIgualitaria extends CalculoDivida {
+	
+	public RegraIgualitaria(Republica republica) {
+		super(republica);
+	}
 
-    Republica republica = new Republica();
-
-    public float divIgual(){
-        return rendaTotal(republica.getListPessoas());
+    public float divida(){
+        return 0;
     }
-
-    
-
-    
 
 }
