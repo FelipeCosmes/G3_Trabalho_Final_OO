@@ -90,15 +90,20 @@ public class UI {
 		boolean parse;
 		
 		do { 
-			try {
-				opcao = Integer.parseInt(strOpcao);
+    		if(strOpcao == null) {
+				opcao = 0;
 				parse = true;
-			} catch (NumberFormatException e) {
-				JOptionPane.showMessageDialog(null, "Opção informada não é um número.\n"
-						+ "Em seguida informe a opção novamente.");
-				strOpcao = JOptionPane.showInputDialog(Main.menu);
-				parse = false;
-			}
+			}else {
+    			try {
+    				opcao = Integer.parseInt(strOpcao);
+    				parse = true;
+    			} catch (NumberFormatException e) {
+    				JOptionPane.showMessageDialog(null, "Opção informada não é um número.\n"
+    						+ "Em seguida informe a opção novamente.");
+    				strOpcao = JOptionPane.showInputDialog(menu);
+    				parse = false;
+    			}
+			}	
 		} while (!parse);
 		
 		return opcao;
