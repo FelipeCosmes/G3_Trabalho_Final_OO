@@ -1,5 +1,6 @@
 package servicos;
 
+import entidades.Pessoa;
 import entidades.Republica;
 
 public class RegraProporcional extends CalculoDivida {
@@ -8,7 +9,9 @@ public class RegraProporcional extends CalculoDivida {
 		super(republica);
 	}
 	
-	public float divida(float renda){
+	@Override
+	public float divida(Pessoa p){
+		float renda = p.getRenda();
         return this.despesaTotal() * renda / this.rendaTotal();
     }
 	

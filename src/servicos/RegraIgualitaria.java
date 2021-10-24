@@ -1,5 +1,6 @@
 package servicos;
 
+import entidades.Pessoa;
 import entidades.Republica;
 
 public class RegraIgualitaria extends CalculoDivida {
@@ -8,7 +9,8 @@ public class RegraIgualitaria extends CalculoDivida {
 		super(republica);
 	}
 
-    public float divida(){
+	@Override
+    public float divida(Pessoa p){
         return 0;
     }
 

@@ -28,4 +28,6 @@ public abstract class CalculoDivida {
 		return total;
 	}
 
+	public abstract float divida(Pessoa p);
+
 }

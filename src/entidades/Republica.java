@@ -16,23 +16,30 @@ import exceptions.DadosPessoaisIncompletosException;
 import exceptions.DescricaoNaoInformadaException;
 import exceptions.RendimentoInvalidoException;
 import exceptions.ValorNaoInformadoException;
+import servicos.CalculoDivida;
+import servicos.RegraIgualitaria;
+import servicos.RegraProporcional;
 
 public class Republica {
 
 	private List<Pessoa> listaPessoas;
 	private List<Despesa> listaDespesas;
-	// private CalculoDivida calculoDivida;
+	
+	public CalculoDivida calculoDivida;
+	
 	private String nomeArquivoPessoa = "alunos.txt";
 	private String strMes;
 	private String strAno;
 
-	public Republica() {
+	public Republica(boolean regraIgualitaria) {
 		listaPessoas = new ArrayList<>();
 		listaDespesas = new ArrayList<>();
-		/*
-		 * calculoDivida.rendaTotal(listaPessoas);
-		 * calculoDivida.despesaTotal(listaDespesas);
-		 */
+		
+		if (regraIgualitaria) {
+			calculoDivida = new RegraIgualitaria(this);			
+		} else {
+			calculoDivida = new RegraProporcional(this);
+		}
 	}
 
 	// -----Cadastro de Data
@@ -79,42 +86,20 @@ public class Republica {
 		}
 	}
 
-	public void cadastroPessoa() {
+	public void cadastroPessoa(String nome, String email, float renda) {
 
-		String nome = JOptionPane.showInputDialog("Nome: ");
-		String email = JOptionPane.showInputDialog("Email: ");
-		String strRenda = JOptionPane.showInputDialog("Renda: ");
-		float renda = Float.parseFloat(strRenda);
-		try {
 			if (nome.isBlank()) {
-
 				throw new DadosPessoaisIncompletosException();
 			}
 			if (email.isBlank()) {
 				throw new DadosPessoaisIncompletosException();
 			}
-			if (strRenda.isEmpty()) {
-				throw new RendimentoInvalidoException();
-			}
 			if (renda <= 0) {
 				throw new RendimentoInvalidoException();
 			}
-			// depois de verificar se todos os parametros estao validos será add o
-			// listaPessoas.
+			
+			// depois de verificar se todos os parametros estao validos
 			listaPessoas.add(new Pessoa(nome, email, renda));
-
-		} catch (RendimentoInvalidoException d) {
-
-			String msg = "rendimento invalido, tente novamente!!" + "\n" + d;
-			JOptionPane.showMessageDialog(null, msg);
-			d.printStackTrace();
-		} catch (DadosPessoaisIncompletosException d) {
-			String msg = "dados pessoais invalidos, tente novamente!!" + "\n" + d;
-			JOptionPane.showMessageDialog(null, msg);
-			d.printStackTrace();
-
-		}
-
 	}
 
 	public List<Pessoa> getListPessoas() {
@@ -222,48 +207,20 @@ public class Republica {
 		}
 	}
 
-	public void cadastroDespesa() {
-		String descricao = JOptionPane.showInputDialog("Descricao: ");
-		String strCat = JOptionPane.showInputDialog("Categoria: ");
-		Categoria categoria = new Categoria(strCat);
-		String strValor = JOptionPane.showInputDialog("Valor: ");
-		float valor = Float.parseFloat(strValor);
-		// String resp = JOptionPane.showInputDialog("Subcategoria: ");
-
-//		try{
-//			listaDespesas.add(new Despesa(descricao, categoria, valor));
-//			}
-//		}catch(CategoriaNaoInformadaException f) {
-//		
-//	}
-		try {
-			if (descricao.isBlank()) {
-				throw new DescricaoNaoInformadaException();
-			}
-			if (categoria.getNome().isBlank()) {
-				throw new CategoriaNaoInformadaException();
-			}
-			if (valor <= 0) {
-				throw new ValorNaoInformadoException();
-			}
-
-			listaDespesas.add(new Despesa(descricao, categoria, valor));
-
-		} catch (CategoriaNaoInformadaException g) {
-			String msg = "categoria nao informada, tente novamente!!" + "\n" + g;
-			JOptionPane.showMessageDialog(null, msg);
-			g.printStackTrace();
-		} catch (DescricaoNaoInformadaException g) {
-			String msg = "descrição nao informada, tente novamente!!" + "\n" + g;
-			JOptionPane.showMessageDialog(null, msg);
-			g.printStackTrace();
-		} catch (ValorNaoInformadoException h) {
-			String msg = "valor invalido ou nulo, insira um valor positivo!!" + "\n" + h;
-			JOptionPane.showMessageDialog(null, msg);
-			h.printStackTrace();
+	public void cadastroDespesa(String descricao, Categoria categoria, float valor) {
+		
+		if (descricao.isBlank()) {
+			throw new DescricaoNaoInformadaException();
+		}
+		if (categoria.getNome().isBlank()) {
+			throw new CategoriaNaoInformadaException();
+		}
+		if (valor <= 0) {
+			throw new ValorNaoInformadoException();
 		}
 
-		
+		// depois de verificar se todos os parametros estao validos
+		listaDespesas.add(new Despesa(descricao, categoria, valor));
 	}
 
 	public List<Despesa> getListaDespesas() {
@@ -342,22 +299,6 @@ public class Republica {
 	}
 
 	// -------------------------------------------------------
-
-	public float rendaTotal() {
-		float total = 0;
-		for (Pessoa pessoa : listaPessoas) {
-			total += pessoa.getRenda();
-		}
-		return total;
-	}
-
-	public float despesaTotal() {
-		float total = 0;
-		for (Despesa despesa : listaDespesas) {
-			total += despesa.getValor();
-		}
-		return total;
-	}
 
 	public String getStrAno() {
 		return strAno;
