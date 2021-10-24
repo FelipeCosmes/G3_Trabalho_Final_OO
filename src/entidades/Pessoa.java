@@ -1,5 +1,8 @@
 package entidades;
 
+import exceptions.DadosPessoaisIncompletosException;
+import exceptions.RendimentoInvalidoException;
+
 public class Pessoa {
 	
 	private String nome;
@@ -7,13 +10,19 @@ public class Pessoa {
 	private float renda;
 	
 	public Pessoa (String nome, String email, float renda) {
+		if (nome.isBlank()) {
+			throw new DadosPessoaisIncompletosException();
+		}
+		if (email.isBlank()) {
+			throw new DadosPessoaisIncompletosException();
+		}
+		if (renda <= 0) {
+			throw new RendimentoInvalidoException();
+		}
+		
 		this.nome = nome;
 		this.email = email;
 		this.renda = renda;
-	}
-	
-	public Pessoa() {
-		
 	}
 	
 	public String getNome() {

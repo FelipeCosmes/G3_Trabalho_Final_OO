@@ -11,11 +11,6 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import exceptions.CategoriaNaoInformadaException;
-import exceptions.DadosPessoaisIncompletosException;
-import exceptions.DescricaoNaoInformadaException;
-import exceptions.RendimentoInvalidoException;
-import exceptions.ValorNaoInformadoException;
 import servicos.CalculoDivida;
 import servicos.RegraIgualitaria;
 import servicos.RegraProporcional;
@@ -31,13 +26,13 @@ public class Republica {
 	private String strMes;
 	private String strAno;
 
-	public Republica(boolean regraIgualitaria) {
+	public Republica(String regra) {
 		listaPessoas = new ArrayList<>();
 		listaDespesas = new ArrayList<>();
 		
-		if (regraIgualitaria) {
+		if (regra == "Igualitária") {
 			calculoDivida = new RegraIgualitaria(this);			
-		} else {
+		} else if (regra == "Proporcional") {
 			calculoDivida = new RegraProporcional(this);
 		}
 	}
@@ -86,20 +81,8 @@ public class Republica {
 		}
 	}
 
-	public void cadastroPessoa(String nome, String email, float renda) {
-
-			if (nome.isBlank()) {
-				throw new DadosPessoaisIncompletosException();
-			}
-			if (email.isBlank()) {
-				throw new DadosPessoaisIncompletosException();
-			}
-			if (renda <= 0) {
-				throw new RendimentoInvalidoException();
-			}
-			
-			// depois de verificar se todos os parametros estao validos
-			listaPessoas.add(new Pessoa(nome, email, renda));
+	public void cadastroPessoa(Pessoa p) {
+			listaPessoas.add(p);
 	}
 
 	public List<Pessoa> getListPessoas() {
@@ -125,18 +108,18 @@ public class Republica {
 		}
 	}
 
-	public void excluirPessoa(String nome) {
-		Pessoa resp = null;
-		for(Pessoa p : listaPessoas){
-			if (p.getNome().equalsIgnoreCase(nome)){
-				resp = p;
-				JOptionPane.showMessageDialog(null, "Cadastro de " + resp.getNome() + " removido");
-				break;
-			}
-		}
-		if(resp==null){
-			JOptionPane.showMessageDialog(null, "Cadastro nao encontrado!");
-		}
+	public void excluirPessoa(Pessoa resp) {
+//		Pessoa resp = null;
+//		for(Pessoa p : listaPessoas){
+//			if (p.getNome().equalsIgnoreCase(nome)){
+//				resp = p;
+//				JOptionPane.showMessageDialog(null, "Cadastro de " + resp.getNome() + " removido");
+//				break;
+//			}
+//		}
+//		if(resp==null){
+//			JOptionPane.showMessageDialog(null, "Cadastro nao encontrado!");
+//		}
 		listaPessoas.remove(resp);
 
 		// ----- Excluir de alunos.txt
@@ -193,7 +176,7 @@ public class Republica {
 
 				if (linha != null) {
 					String[] registro = linha.split(" ; ");
-					Despesa a = new Despesa();
+					Despesa a;
 					a = new Despesa(registro[0], new Categoria(registro[1]), Float.parseFloat(registro[2]));
 					listaDespesas.add(a);
 				}
@@ -207,20 +190,8 @@ public class Republica {
 		}
 	}
 
-	public void cadastroDespesa(String descricao, Categoria categoria, float valor) {
-		
-		if (descricao.isBlank()) {
-			throw new DescricaoNaoInformadaException();
-		}
-		if (categoria.getNome().isBlank()) {
-			throw new CategoriaNaoInformadaException();
-		}
-		if (valor <= 0) {
-			throw new ValorNaoInformadoException();
-		}
-
-		// depois de verificar se todos os parametros estao validos
-		listaDespesas.add(new Despesa(descricao, categoria, valor));
+	public void cadastroDespesa(Despesa d) {
+		listaDespesas.add(d);
 	}
 
 	public List<Despesa> getListaDespesas() {
@@ -246,18 +217,18 @@ public class Republica {
 		}
 	}
 
-	public void excluirDespesa(String descricao) {
-		Despesa desp = null;
-		for (Despesa p : listaDespesas) {
-			if (p.getDescricao().equalsIgnoreCase(descricao)) {
-				desp = p;
-				JOptionPane.showMessageDialog(null, "Cadastro de " + desp.getDescricao() + " removido");
-				break;
-			}
-		}
-		if (desp == null) {
-			JOptionPane.showMessageDialog(null, "Cadastro nao encontrado!");
-		}
+	public void excluirDespesa(Despesa desp) {
+//		Despesa desp = null;
+//		for (Despesa p : listaDespesas) {
+//			if (p.getDescricao().equalsIgnoreCase(descricao)) {
+//				desp = p;
+//				JOptionPane.showMessageDialog(null, "Cadastro de " + desp.getDescricao() + " removido");
+//				break;
+//			}
+//		}
+//		if (desp == null) {
+//			JOptionPane.showMessageDialog(null, "Cadastro nao encontrado!");
+//		}
 		listaDespesas.remove(desp);
 
 		// ----- Excluir de despesas_<Mes>_<Ano>.txt
