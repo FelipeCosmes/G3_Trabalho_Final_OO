@@ -26,7 +26,10 @@ public class Main {
 	
     public static void main(String[] args) {
     	
-    	Republica republica = new Republica();
+    	String strMes = UI.getString("Informe o mês do cadastro: ");
+    	String strAno = UI.getString("Informe o ano do cadastro: ");
+    	
+    	Republica republica = new Republica(strMes, strAno);
     	
     	CalculoDivida igualitaria = new RegraIgualitaria(republica);
     	CalculoDivida proporcional = new RegraProporcional(republica);
@@ -38,9 +41,9 @@ public class Main {
 		} else if (regra == "Proporcional") {
 			republica.calculoDivida = proporcional;
 		}
-        
-        // republica.lerPessoas();
-        // republica.lerDespesas();
+    	
+        republica.lerPessoas();
+        republica.lerDespesas();
         
         int opcao = 0;
         

@@ -81,10 +81,6 @@ public class UI {
 		return new Despesa(descricao, categoria, valor);
 	}
 	
-	public static void excluirDespesa(Despesa d) {
-		// TODO
-	}
-	
 	// Metodo para mostrar o menu
 	public static int showMenu() {
 		int opcao = 0;
@@ -106,6 +102,11 @@ public class UI {
 		} while (!parse);
 		
 		return opcao;
+	}
+	
+	// Metodo para receber uma String do usuario
+	public static String getString(String msg) {
+		return JOptionPane.showInputDialog(msg);
 	}
 	
 	// Metodo para mostrar uma mensagem

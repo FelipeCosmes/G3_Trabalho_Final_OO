@@ -9,8 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
+import app.UI;
 import servicos.CalculoDivida;
 
 public class Republica {
@@ -24,23 +23,17 @@ public class Republica {
 	private String strMes;
 	private String strAno;
 
-	public Republica() {
+	public Republica(String strMes, String strAno) {
 		listaPessoas = new ArrayList<>();
 		listaDespesas = new ArrayList<>();
 		
 		calculoDivida = null;
+		
+		this.strMes = strMes;
+		this.strAno = strAno;
 	}
 
-	// -----Cadastro de Data
-
-	public String data() {
-
-		setStrMes(JOptionPane.showInputDialog("MÃªs do cadastro: "));
-		setStrAno(JOptionPane.showInputDialog("Ano do cadastro: "));
-
-		return "despesas_" + strMes + "_" + strAno + ".txt";
-	}
-
+	// ----- get data do relatório
 	public String getData() {
 		return "despesas_" + strMes + "_" + strAno + ".txt";
 	}
@@ -67,7 +60,7 @@ public class Republica {
 				}
 			} while (linha != null);
 
-			JOptionPane.showMessageDialog(null, "Registros de Pessoa carregados do arquivo");
+			UI.mensagem("Registros de Pessoa carregados do arquivo");
 			buffer.close();
 
 		} catch (IOException e) {
@@ -161,7 +154,7 @@ public class Republica {
 		BufferedReader buffer = null;
 
 		try {
-			in = new FileReader(data());
+			in = new FileReader(getData());
 			buffer = new BufferedReader(in);
 
 			String linha = null;
@@ -176,7 +169,7 @@ public class Republica {
 				}
 			} while (linha != null);
 
-			JOptionPane.showMessageDialog(null, "Registros de Despesa carregados do arquivo");
+			UI.mensagem("Registros de Despesa carregados do arquivo");
 			buffer.close();
 
 		} catch (IOException e) {
