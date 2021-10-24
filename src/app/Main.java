@@ -8,6 +8,9 @@ import exceptions.DadosPessoaisIncompletosException;
 import exceptions.DescricaoNaoInformadaException;
 import exceptions.RendimentoInvalidoException;
 import exceptions.ValorNaoInformadoException;
+import servicos.CalculoDivida;
+import servicos.RegraIgualitaria;
+import servicos.RegraProporcional;
 
 public class Main {
 	
@@ -18,13 +21,23 @@ public class Main {
 						            + "4 - Excluir despesa \n" 
 						            + "5 - Calcular Divida \n"
 						            + "6 - Imprimir relatório \n"
+						            + "9 - Mudar regra de cálculo \n"
 						            + "0 - Sair";
 	
     public static void main(String[] args) {
     	
+    	Republica republica = new Republica();
+    	
+    	CalculoDivida igualitaria = new RegraIgualitaria(republica);
+    	CalculoDivida proporcional = new RegraProporcional(republica);
+    	
     	String regra = UI.selecionarRegra();
-
-        Republica republica = new Republica(regra);
+    	
+    	if (regra == "Igualitária") {
+    		republica.calculoDivida = igualitaria;			
+		} else if (regra == "Proporcional") {
+			republica.calculoDivida = proporcional;
+		}
         
         // republica.lerPessoas();
         // republica.lerDespesas();
@@ -95,6 +108,16 @@ public class Main {
             		UI.mensagem(msg);            		
             	}
                 break;
+                
+            case 9:
+            	regra = UI.selecionarRegra();
+            	
+            	if (regra == "Igualitária") {
+            		republica.calculoDivida = igualitaria;			
+        		} else if (regra == "Proporcional") {
+        			republica.calculoDivida = proporcional;
+        		}
+            	break;
                 
             case 0:
                 break;

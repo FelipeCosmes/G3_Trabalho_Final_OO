@@ -12,8 +12,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import servicos.CalculoDivida;
-import servicos.RegraIgualitaria;
-import servicos.RegraProporcional;
 
 public class Republica {
 
@@ -26,15 +24,11 @@ public class Republica {
 	private String strMes;
 	private String strAno;
 
-	public Republica(String regra) {
+	public Republica() {
 		listaPessoas = new ArrayList<>();
 		listaDespesas = new ArrayList<>();
 		
-		if (regra == "Igualitária") {
-			calculoDivida = new RegraIgualitaria(this);			
-		} else if (regra == "Proporcional") {
-			calculoDivida = new RegraProporcional(this);
-		}
+		calculoDivida = null;
 	}
 
 	// -----Cadastro de Data
