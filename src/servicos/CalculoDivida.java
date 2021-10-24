@@ -1,33 +1,28 @@
-package servicos;
+package entidades;
 
-import entidades.Despesa;
-import entidades.Pessoa;
-import entidades.Republica;
+import java.util.List;
 
 public abstract class CalculoDivida {
-	
-	private Republica republica;
-	
-	public CalculoDivida(Republica republica) {
-		this.republica = republica;
-	}
 
-    public float rendaTotal() {
+    public float rendaTotal(List<Pessoa> listaPessoas) {
 		float total = 0;
-		for (Pessoa pessoa : republica.getListPessoas()) {
+		for (Pessoa pessoa : listaPessoas) {
 			total += pessoa.getRenda();
 		}
 		return total;
 	}
 
-    public float despesaTotal() {
+    public float despesaTotal(List<Despesa> listaDespesas) {
 		float total = 0;
-		for (Despesa despesa : republica.getListaDespesas()) {
+		for (Despesa despesa : listaDespesas) {
 			total += despesa.getValor();
 		}
 		return total;
 	}
 
-	public abstract float divida(Pessoa p);
+    public void calcularDiv(Object tipo){
+    	
+
+	}
 
 }

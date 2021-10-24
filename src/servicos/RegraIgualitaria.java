@@ -1,17 +1,18 @@
-package servicos;
-
-import entidades.Pessoa;
-import entidades.Republica;
+package entidades;
 
 public class RegraIgualitaria extends CalculoDivida {
-	
-	public RegraIgualitaria(Republica republica) {
-		super(republica);
-	}
 
-	@Override
-    public float divida(Pessoa p){
-        return 0;
+    Republica republica = new Republica();
+
+    //public float divIgual(){
+    //    return rendaTotal(republica.getListPessoas());
+    //}
+
+    public float divIgual(){
+        return despesaTotal(republica.getListaDespesas())/republica.getListPessoas().size();
     }
+    
+
+    
 
 }
