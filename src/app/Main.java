@@ -2,8 +2,8 @@ package app;
 
 import entidades.Despesa;
 import entidades.Pessoa;
-import entidades.RegraIgualitaria;
 import entidades.Republica;
+import servicos.RegraIgualitaria;
 
 import javax.swing.*;
 

@@ -1,4 +1,6 @@
-package entidades;
+package servicos;
+
+import entidades.Republica;
 
 public class RegraIgualitaria extends CalculoDivida {
 

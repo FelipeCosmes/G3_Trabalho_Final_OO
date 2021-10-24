@@ -1,4 +1,4 @@
-package entidades;
+package servicos;
 
 public class RegraProporcional extends CalculoDivida {
     

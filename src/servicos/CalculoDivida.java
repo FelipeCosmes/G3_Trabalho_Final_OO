@@ -1,6 +1,9 @@
-package entidades;
+package servicos;
 
 import java.util.List;
+
+import entidades.Despesa;
+import entidades.Pessoa;
 
 public abstract class CalculoDivida {
 
