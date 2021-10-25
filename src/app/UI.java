@@ -93,14 +93,14 @@ public class UI {
     		if(strOpcao == null) {
 				opcao = 0;
 				parse = true;
-			}else {
+			} else {
     			try {
     				opcao = Integer.parseInt(strOpcao);
     				parse = true;
     			} catch (NumberFormatException e) {
     				JOptionPane.showMessageDialog(null, "Opção informada não é um número.\n"
     						+ "Em seguida informe a opção novamente.");
-    				strOpcao = JOptionPane.showInputDialog(menu);
+    				strOpcao = JOptionPane.showInputDialog(Main.menu);
     				parse = false;
     			}
 			}	
