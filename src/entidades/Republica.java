@@ -38,7 +38,7 @@ public class Republica {
 		return "despesas_" + strMes + "_" + strAno + ".txt";
 	}
 
-	// -----Leitura, Cadastro e GravaÃ§Ã£o de Pessoas
+	// -----Leitura, Cadastro e Grava��o de Pessoas
 
 	public void lerPessoas() {
 		FileReader in = null;
@@ -152,29 +152,31 @@ public class Republica {
 	public void lerDespesas() {
 		FileReader in = null;
 		BufferedReader buffer = null;
+		File f = new File(getData());
+		if(f.isFile()) {
+			try {
+				in = new FileReader(getData());
+				buffer = new BufferedReader(in);
 
-		try {
-			in = new FileReader(getData());
-			buffer = new BufferedReader(in);
+				String linha = null;
+				do {
+					linha = buffer.readLine();
 
-			String linha = null;
-			do {
-				linha = buffer.readLine();
+					if (linha != null) {
+						String[] registro = linha.split(" ; ");
+						Despesa a;
+						a = new Despesa(registro[0], new Categoria(registro[1]), Float.parseFloat(registro[2]));
+						listaDespesas.add(a);
+					}
+				} while (linha != null);
 
-				if (linha != null) {
-					String[] registro = linha.split(" ; ");
-					Despesa a;
-					a = new Despesa(registro[0], new Categoria(registro[1]), Float.parseFloat(registro[2]));
-					listaDespesas.add(a);
-				}
-			} while (linha != null);
+				UI.mensagem("Registros de Despesa carregados do arquivo");
+				buffer.close();
 
-			UI.mensagem("Registros de Despesa carregados do arquivo");
-			buffer.close();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} 
 	}
 
 	public void cadastroDespesa(Despesa d) {
