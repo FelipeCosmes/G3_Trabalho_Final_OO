@@ -26,8 +26,90 @@ public class Main {
 	
     public static void main(String[] args) {
     	
-    	String strMes = UI.getString("Informe o mês do cadastro: ");
+    	
+    	
+    	String strMes = UI.selecionarMes();
+    	String strAno = UI.selecionarAno();
+    	/* boolean parse = true;
+    	 * String strMes = UI.getString("Informe o mês do cadastro: ");	
+		
+    	do{
+    		
+    		
+        	if(strMes != null && !strMes.isEmpty()) {
+        		
+        		try {
+        			
+        			float valorMes = Float.parseFloat(strMes);
+                	while (12< valorMes || valorMes <= 0 ) {
+                		strMes = UI.getString("Mês invalido. Informe novamente o mês do cadastro: ");
+    	            	if(strMes != null && !strMes.isEmpty()) {
+    	            		valorMes = Float.parseFloat(strMes);
+    	            	} else {
+    	            		break;
+    	            	}
+
+                	}
+                	
+		            if(strMes != null && !strMes.isEmpty()) {	
+		        		try{
+		    		        Integer.parseInt(strMes);
+		    		        parse = true;
+		    		    } catch (NumberFormatException ex)
+		    		    {
+		    		    	UI.alerta("Mês inválido.");
+		    		    	strMes = UI.getString("Informe novamente o mês do cadastro: ");
+		    		    	parse = false;
+		    		    }
+		            }
+        		} catch (NumberFormatException e) {
+        			UI.alerta("Por favor, escreva um número");
+        			strMes = UI.getString("Informe novamente o mês do cadastro: ");
+    		    	parse = false;
+        		}
+	            
+    		}
+    	}while(!parse);
+		    
+    	
+    	
+    	
     	String strAno = UI.getString("Informe o ano do cadastro: ");
+    	
+    	do {
+	    	if(strAno != null && !strAno.isEmpty()) {
+	    		try {
+		    		float valorAno = Float.parseFloat(strAno);
+		        	
+		        	while(1970> valorAno){
+		        		strAno = UI.getString("Ano invalido. Informe novamente o ano do cadastro: ");
+		        		if(strAno != null && !strAno.isEmpty()) {
+		        			valorAno = Float.parseFloat(strAno);
+		            	} else {
+		            		break;
+		            	}
+		        	}
+		        	if(strAno != null && !strAno.isEmpty()) {
+		        		try{
+		    		        Integer.parseInt(strAno);
+		    		        parse = true;
+		    		    } catch (NumberFormatException ex)
+		    		    {
+		    		    	UI.alerta("Ano inválido.");
+		    		    	strAno = UI.getString("Informe novamente o ano do cadastro: ");
+		    		    	parse = false;
+		    		    }
+		        	}
+	    		} catch (NumberFormatException ex) {
+	    			UI.alerta("Por favor, escreva um número");
+        			strAno = UI.getString("Informe novamente o ano do cadastro: ");
+    		    	parse = false;
+	    		}
+
+	    	}
+    	}while(!parse);
+    	*/
+    	
     	
     	Republica republica = new Republica(strMes, strAno);
     	

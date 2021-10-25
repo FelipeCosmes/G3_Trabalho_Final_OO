@@ -29,6 +29,24 @@ public class UI {
         		"Divisão de despesa", JOptionPane.INFORMATION_MESSAGE, null, regra, regra[0]);
 	}
 	
+	//Metodo para selecionar o mês
+	public static String selecionarMes() {
+		String[] opMes = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
+        return (String) JOptionPane.showInputDialog(null, "Escolha o mês:", 
+        		"Data do cadastro", JOptionPane.INFORMATION_MESSAGE, null, opMes, opMes[0]);
+	}
+	
+	//Metodo para selecionar o ano
+	public static String selecionarAno() {
+		String[] opAno = new String [131];
+		for (int i = 1970; i<=2100; i++) {
+			opAno[i-1970] = Integer.toString(i);
+		}
+		
+        return (String) JOptionPane.showInputDialog(null, "Escolha o Ano:", 
+        		"Data do cadastro", JOptionPane.INFORMATION_MESSAGE, null, opAno, opAno[0]);
+	}
+	
 	// Metodo para adquirir os dados da pessoa cadastrada
 	public static Pessoa criaPessoa() {
 		
@@ -90,7 +108,7 @@ public class UI {
 		boolean parse;
 		
 		do { 
-    		if(strOpcao == null) {
+    		if(strOpcao == null||strOpcao.isEmpty()) {
 				opcao = 0;
 				parse = true;
 			} else {
