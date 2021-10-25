@@ -1,9 +1,5 @@
 package entidades;
 
-import exceptions.CategoriaNaoInformadaException;
-import exceptions.DescricaoNaoInformadaException;
-import exceptions.ValorNaoInformadoException;
-
 public class Despesa {
 	
 	String descricao;
@@ -11,19 +7,13 @@ public class Despesa {
 	float valor;
 	
 	public Despesa (String descricao, Categoria categoria, float valor) {
-		if (descricao.isBlank()) {
-			throw new DescricaoNaoInformadaException();
-		}
-		if (categoria.getNome().isBlank()) {
-			throw new CategoriaNaoInformadaException();
-		}
-		if (valor <= 0) {
-			throw new ValorNaoInformadoException();
-		}
-		
 		this.descricao = descricao;
 		this.valor = valor;
 		this.categoria = categoria;
+	}
+
+	public Despesa(){
+		
 	}
 
 	public String getDescricao() {
@@ -42,7 +32,7 @@ public class Despesa {
 
 	@Override
 	public String toString() {
-		return descricao + " ; " + getCategoria().getNome() + " ; " + valor;
+		return descricao + " ; " + getCategoria().getNome() + " ; " + String.format("%.2f", valor);
 	}
 
 }
