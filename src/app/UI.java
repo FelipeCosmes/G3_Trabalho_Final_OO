@@ -51,11 +51,26 @@ public class UI {
 	public static Pessoa criaPessoa() {
 		
 		String nome = JOptionPane.showInputDialog("Nome: ");
+		boolean ver;
+		do { 
+			
+			if(nome.matches(".*\\d.*")) {
+				JOptionPane.showMessageDialog(null, "Digite apenas letras");
+				nome = JOptionPane.showInputDialog("Nome: ");
+				ver = false;
+			} else {
+				ver = true;
+				
+			}
+		} while (!ver);
+		
 		String email = JOptionPane.showInputDialog("Email: ");
 		String strRenda = JOptionPane.showInputDialog("Renda: ");
 		
 		float renda = 0;
 		boolean parse;
+
+	
 		
 		do { 
 			try {
@@ -77,6 +92,20 @@ public class UI {
 		
 		String descricao = JOptionPane.showInputDialog("Descricao: ");
 		String strCat = JOptionPane.showInputDialog("Categoria: ");
+		boolean ver;
+		
+	do { 
+			
+			if(strCat.matches(".*\\d.*")) {
+				JOptionPane.showMessageDialog(null, "Digite apenas letras");
+				strCat = JOptionPane.showInputDialog("categoria: ");
+				ver = false;
+			} else {
+				ver = true;
+				
+			}
+		} while (!ver);
+		
 		String strValor = JOptionPane.showInputDialog("Valor: ");
 		
 		float valor = 0;
