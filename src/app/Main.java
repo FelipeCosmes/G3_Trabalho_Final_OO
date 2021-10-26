@@ -20,8 +20,8 @@ public class Main {
 						            + "3 - Excluir pessoa \n" 
 						            + "4 - Excluir despesa \n" 
 						            + "5 - Calcular Divida \n"
-						            + "6 - Imprimir relatório \n"
-						            + "9 - Mudar regra de cálculo \n"
+						            + "6 - Imprimir relatorio \n"
+						            + "9 - Mudar regra de calculo \n"
 						            + "0 - Sair";
 	
     public static void main(String[] args) {
@@ -31,7 +31,7 @@ public class Main {
     	String strMes = UI.selecionarMes();
     	String strAno = UI.selecionarAno();
     	/* boolean parse = true;
-    	 * String strMes = UI.getString("Informe o mês do cadastro: ");	
+    	 * String strMes = UI.getString("Informe o mï¿½s do cadastro: ");	
 		
     	do{
     		
@@ -42,7 +42,7 @@ public class Main {
         			
         			float valorMes = Float.parseFloat(strMes);
                 	while (12< valorMes || valorMes <= 0 ) {
-                		strMes = UI.getString("Mês invalido. Informe novamente o mês do cadastro: ");
+                		strMes = UI.getString("Mï¿½s invalido. Informe novamente o mï¿½s do cadastro: ");
     	            	if(strMes != null && !strMes.isEmpty()) {
     	            		valorMes = Float.parseFloat(strMes);
     	            	} else {
@@ -57,14 +57,14 @@ public class Main {
 		    		        parse = true;
 		    		    } catch (NumberFormatException ex)
 		    		    {
-		    		    	UI.alerta("Mês inválido.");
-		    		    	strMes = UI.getString("Informe novamente o mês do cadastro: ");
+		    		    	UI.alerta("Mï¿½s invï¿½lido.");
+		    		    	strMes = UI.getString("Informe novamente o mï¿½s do cadastro: ");
 		    		    	parse = false;
 		    		    }
 		            }
         		} catch (NumberFormatException e) {
-        			UI.alerta("Por favor, escreva um número");
-        			strMes = UI.getString("Informe novamente o mês do cadastro: ");
+        			UI.alerta("Por favor, escreva um nï¿½mero");
+        			strMes = UI.getString("Informe novamente o mï¿½s do cadastro: ");
     		    	parse = false;
         		}
 	            
@@ -95,13 +95,13 @@ public class Main {
 		    		        parse = true;
 		    		    } catch (NumberFormatException ex)
 		    		    {
-		    		    	UI.alerta("Ano inválido.");
+		    		    	UI.alerta("Ano invï¿½lido.");
 		    		    	strAno = UI.getString("Informe novamente o ano do cadastro: ");
 		    		    	parse = false;
 		    		    }
 		        	}
 	    		} catch (NumberFormatException ex) {
-	    			UI.alerta("Por favor, escreva um número");
+	    			UI.alerta("Por favor, escreva um nï¿½mero");
         			strAno = UI.getString("Informe novamente o ano do cadastro: ");
     		    	parse = false;
 	    		}
@@ -118,7 +118,7 @@ public class Main {
     	
     	String regra = UI.selecionarRegra();
     	
-    	if (regra == "Igualitária") {
+    	if (regra == "Igualitaria") {
     		republica.calculoDivida = igualitaria;			
 		} else if (regra == "Proporcional") {
 			republica.calculoDivida = proporcional;
@@ -141,9 +141,9 @@ public class Main {
             		p = UI.criaPessoa();
             		republica.cadastroPessoa(p);
         		} catch (DadosPessoaisIncompletosException e) {
-        			UI.alerta("Dados pessoais inválidos. Tente novamente!");
+        			UI.alerta("Dados pessoais invalidos. Tente novamente!");
         		} catch (RendimentoInvalidoException e) {
-        			UI.alerta("Rendimento inválido. Tente novamente!");
+        			UI.alerta("Rendimento invalido. Tente novamente!");
         		}
                 republica.gravarPessoas();
                 break;
@@ -153,11 +153,11 @@ public class Main {
             		d = UI.criaDespesa();
             		republica.cadastroDespesa(d);
         		} catch (CategoriaNaoInformadaException e) {
-        			UI.alerta("Categoria não informada. Tente novamente!");
+        			UI.alerta("Categoria nao informada. Tente novamente!");
         		} catch (DescricaoNaoInformadaException e) {
-        			UI.alerta("Descrição não informada. Tente novamente!");
+        			UI.alerta("Descricao nao informada. Tente novamente!");
         		} catch (ValorNaoInformadoException e) {
-        			UI.alerta("Valor não informado. Tente novamente!");
+        			UI.alerta("Valor nao informado. Tente novamente!");
         		}
                 republica.gravarDespesas();
                 break;
@@ -175,8 +175,8 @@ public class Main {
             case 5:
             	p = UI.selecionar(republica.getListPessoas(), "Calcular Divida");
             	float divida = republica.calculoDivida.divida(p);
-            	UI.mensagem("A dívida de " + p.getNome() + " é de R$ " + 
-            			String.format("%.2f", divida) + "!");
+            	UI.mensagem("A divida de " + p.getNome() + " e de R$ " + 
+            			String.format("%.2f", divida));
                 break;
                 
             case 6:
@@ -184,11 +184,11 @@ public class Main {
             	for(Pessoa pessoa : republica.getListPessoas()) {
             		msg += "Nome: " + pessoa.getNome()
             			 + ", renda: " + pessoa.getRenda()
-            			 + ", dívida: " + republica.calculoDivida.divida(pessoa)
+            			 + ", divida: " + republica.calculoDivida.divida(pessoa)
             			 + ".\n";
             	}
             	if(republica.getListPessoas().size() == 0) {
-            		UI.alerta("Lista vazia!", "Imprimir relatório");
+            		UI.alerta("Lista vazia!", "Imprimir relatario");
             	} else {
             		UI.mensagem(msg);            		
             	}
@@ -197,7 +197,7 @@ public class Main {
             case 9:
             	regra = UI.selecionarRegra();
             	
-            	if (regra == "Igualitária") {
+            	if (regra == "Igualitaria") {
             		republica.calculoDivida = igualitaria;			
         		} else if (regra == "Proporcional") {
         			republica.calculoDivida = proporcional;
@@ -208,7 +208,7 @@ public class Main {
                 break;
 
             default:
-                UI.alerta("Opção Inválida!");
+                UI.alerta("Opcao Invalida!");
                 break;
         	}
         } while (opcao != 0);

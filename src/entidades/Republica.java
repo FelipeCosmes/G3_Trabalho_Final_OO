@@ -33,12 +33,12 @@ public class Republica {
 		this.strAno = strAno;
 	}
 
-	// ----- get data do relatório
+	// ----- get data do relatï¿½rio
 	public String getData() {
 		return "despesas_" + strMes + "_" + strAno + ".txt";
 	}
 
-	// -----Leitura, Cadastro e Gravação de Pessoas
+	// -----Leitura, Cadastro e Gravacï¿½o de Pessoas
 
 	public void lerPessoas() {
 		FileReader in = null;

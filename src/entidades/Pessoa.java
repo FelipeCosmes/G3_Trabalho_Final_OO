@@ -34,7 +34,8 @@ public class Pessoa {
 
 	@Override
 	public String toString() {
-		return nome + " ; " + email + " ; " + String.format("%.2f", renda);
+		//return nome + " ; " + email + " ; " + String.format("%.2f", renda);
+		return nome + " ; " + email + " ; " + renda;
 	}
 	
 }

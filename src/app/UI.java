@@ -24,15 +24,15 @@ public class UI {
 	
 	// Metodo para selecionar a regra de calculo das dividas individuais
 	public static String selecionarRegra() {
-		String[] regra = {"Igualitária", "Proporcional"};
-        return (String) JOptionPane.showInputDialog(null, "Forma de divisão para as despesas:", 
-        		"Divisão de despesa", JOptionPane.INFORMATION_MESSAGE, null, regra, regra[0]);
+		String[] regra = {"Igualitaria", "Proporcional"};
+        return (String) JOptionPane.showInputDialog(null, "Forma de divisao para as despesas:", 
+        		"Divisao de despesa", JOptionPane.INFORMATION_MESSAGE, null, regra, regra[0]);
 	}
 	
-	//Metodo para selecionar o mês
+	//Metodo para selecionar o mï¿½s
 	public static String selecionarMes() {
-		String[] opMes = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
-        return (String) JOptionPane.showInputDialog(null, "Escolha o mês:", 
+		String[] opMes = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
+        return (String) JOptionPane.showInputDialog(null, "Escolha o mes:", 
         		"Data do cadastro", JOptionPane.INFORMATION_MESSAGE, null, opMes, opMes[0]);
 	}
 	
@@ -77,7 +77,7 @@ public class UI {
 				renda = Float.parseFloat(strRenda);
 				parse = true;
 			} catch (NumberFormatException e) {
-				JOptionPane.showMessageDialog(null, "Valor de renda informado não é um número.\n"
+				JOptionPane.showMessageDialog(null, "Valor de renda informado nao e um numero.\n"
 						+ "Em seguida informe a renda novamente.");
 				strRenda = JOptionPane.showInputDialog("Renda: ");
 				parse = false;
@@ -116,7 +116,7 @@ public class UI {
 				valor = Float.parseFloat(strValor);
 				parse = true;
 			} catch (NumberFormatException e) {
-				JOptionPane.showMessageDialog(null, "Valor da despesa informado não é um número.\n"
+				JOptionPane.showMessageDialog(null, "Valor da despesa informado nao e um numero.\n"
 						+ "Em seguida informe o valor novamente.");
 				strValor = JOptionPane.showInputDialog("Valor: ");
 				parse = false;
@@ -145,8 +145,8 @@ public class UI {
     				opcao = Integer.parseInt(strOpcao);
     				parse = true;
     			} catch (NumberFormatException e) {
-    				JOptionPane.showMessageDialog(null, "Opção informada não é um número.\n"
-    						+ "Em seguida informe a opção novamente.");
+    				JOptionPane.showMessageDialog(null, "Opcao informada nao e um numero.\n"
+    						+ "Em seguida informe a opcao novamente.");
     				strOpcao = JOptionPane.showInputDialog(Main.menu);
     				parse = false;
     			}
@@ -168,7 +168,7 @@ public class UI {
 	
 	// Metodos para mostrar uma alerta	
 	public static void alerta(String msg) {
-		JOptionPane.showMessageDialog(null, msg, "ATENÇÃO!", JOptionPane.WARNING_MESSAGE);
+		JOptionPane.showMessageDialog(null, msg, "ATENCAO!", JOptionPane.WARNING_MESSAGE);
 	}
 	
 	public static void alerta(String msg, String titulo) {

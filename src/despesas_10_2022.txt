@@ -1,3 +1,0 @@
-luz ; a ; 10.0
-comida ; a ; 20.0
-internet ; a ; 120.0

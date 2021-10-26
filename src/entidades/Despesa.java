@@ -32,7 +32,8 @@ public class Despesa {
 
 	@Override
 	public String toString() {
-		return descricao + " ; " + getCategoria().getNome() + " ; " + String.format("%.2f", valor);
+		//return descricao + " ; " + getCategoria().getNome() + " ; " + String.format("%.2f", valor);
+		return descricao + " ; " + getCategoria().getNome() + " ; " + valor;
 	}
 
 }

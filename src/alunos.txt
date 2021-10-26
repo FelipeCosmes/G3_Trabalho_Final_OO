@@ -1,2 +1,0 @@
-selfie ; a ; 12.0
-joao ; a ; 32.0
