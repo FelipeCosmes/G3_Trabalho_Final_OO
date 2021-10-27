@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import entidades.Categoria;
 import entidades.Despesa;
 import entidades.Pessoa;
+import exceptions.RendimentoInvalidoException;
 
 public class UI {
 	
@@ -76,12 +77,20 @@ public class UI {
 			try {
 				renda = Float.parseFloat(strRenda);
 				parse = true;
+				if(renda<0){
+					throw new RendimentoInvalidoException();
+				}
 			} catch (NumberFormatException e) {
 				JOptionPane.showMessageDialog(null, "Valor de renda informado nao e um numero.\n"
 						+ "Em seguida informe a renda novamente.");
 				strRenda = JOptionPane.showInputDialog("Renda: ");
 				parse = false;
+			} catch (RendimentoInvalidoException e){
+				JOptionPane.showMessageDialog(null, "valor do rendimento nao pode ser negativo");
+				strRenda = JOptionPane.showInputDialog("Renda: ");
+				parse = false;
 			}
+
 		} while (!parse);
 		
 		return new Pessoa(nome, email, renda);

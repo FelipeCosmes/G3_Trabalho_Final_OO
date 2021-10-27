@@ -10,7 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.UI;
+import exceptions.CategoriaNaoInformadaException;
+import exceptions.DadosPessoaisIncompletosException;
+import exceptions.DescricaoNaoInformadaException;
+import exceptions.ValorNaoInformadoException;
 import servicos.CalculoDivida;
+
+import javax.swing.*;
 
 public class Republica {
 
@@ -69,7 +75,20 @@ public class Republica {
 	}
 
 	public void cadastroPessoa(Pessoa p) {
-			listaPessoas.add(p);
+		try{
+			if(p.getNome().isBlank()){
+				throw new DadosPessoaisIncompletosException();
+			}
+			if(p.getEmail().isBlank()){
+				throw new DadosPessoaisIncompletosException();
+			}
+				listaPessoas.add(p);
+		}
+		catch(DadosPessoaisIncompletosException e){
+			JOptionPane.showMessageDialog(null, "Dados pessoais invalidos");
+
+		}
+
 	}
 
 	public List<Pessoa> getListPessoas() {
@@ -180,7 +199,29 @@ public class Republica {
 	}
 
 	public void cadastroDespesa(Despesa d) {
-		listaDespesas.add(d);
+		try{
+			if(d.getCategoria().getNome().isBlank()){
+				throw new CategoriaNaoInformadaException();
+			}
+			if(d.getDescricao().isBlank()){
+				throw new DescricaoNaoInformadaException();
+			}
+			if (d.getValor() < 0) {
+				throw new ValorNaoInformadoException();
+			}
+			listaDespesas.add(d);
+		}
+		catch(ValorNaoInformadoException e){
+			JOptionPane.showMessageDialog(null, "Valor invalido!\n"+ e);
+		}
+		catch(DescricaoNaoInformadaException e){
+			JOptionPane.showMessageDialog(null, "Descricao nao informada!!\n"+ e);
+		}
+		catch (CategoriaNaoInformadaException e){
+			JOptionPane.showMessageDialog(null, "Categoria nao informada\n"+ e);
+
+		}
+
 	}
 
 	public List<Despesa> getListaDespesas() {
