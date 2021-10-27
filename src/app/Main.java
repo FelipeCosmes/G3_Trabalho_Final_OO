@@ -180,19 +180,22 @@ public class Main {
                 break;
                 
             case 6:
-            	String msg = "";
-            	for(Pessoa pessoa : republica.getListPessoas()) {
-            		msg += "Nome: " + pessoa.getNome()
-            			 + ", renda: " + pessoa.getRenda()
-            			 + ", divida: " + republica.calculoDivida.divida(pessoa)
-            			 + ".\n";
-            	}
-            	if(republica.getListPessoas().size() == 0) {
-            		UI.alerta("Lista vazia!", "Imprimir relatario");
-            	} else {
-            		UI.mensagem(msg);            		
-            	}
-                break;
+				String msg = "";
+				for (Pessoa pessoa : republica.getListPessoas()) {
+					msg += String.format("\nNome: %s\nRenda: R$ %.2f\nDivida: R$ %.2f\n", pessoa.getNome(),
+							pessoa.getRenda(), republica.calculoDivida.divida(pessoa));
+					/*
+					 * msg += "Nome: " + pessoa.getNome() + "\nRenda: " + pessoa.getRenda() +
+					 * "\nDivida: " + republica.calculoDivida.divida(pessoa) + ".\n";
+					 */
+				}
+				msg += "\nDespesa total: R$ " + republica.calculoDivida.despesaTotal();
+				if (republica.getListPessoas().size() == 0) {
+					UI.alerta("Lista vazia!", "Imprimir relatario");
+				} else {
+					UI.mensagem(msg);
+				}
+				break;
                 
             case 9:
             	regra = UI.selecionarRegra();
