@@ -75,19 +75,10 @@ public class Republica {
 	}
 
 	public void cadastroPessoa(Pessoa p) {
-		try{
-			if(p.getNome().isBlank()){
-				throw new DadosPessoaisIncompletosException();
-			}
-			if(p.getEmail().isBlank()){
-				throw new DadosPessoaisIncompletosException();
-			}
-				listaPessoas.add(p);
-		}
-		catch(DadosPessoaisIncompletosException e){
-			JOptionPane.showMessageDialog(null, "Dados pessoais invalidos");
 
-		}
+				listaPessoas.add(p);
+
+
 
 	}
 
