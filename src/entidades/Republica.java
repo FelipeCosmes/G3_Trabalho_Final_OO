@@ -24,6 +24,7 @@ public class Republica {
 	private List<Despesa> listaDespesas;
 	
 	public CalculoDivida calculoDivida;
+	public SubCategoria subcategoria;
 	
 	private String nomeArquivoPessoa = "alunos.txt";
 	private String strMes;
@@ -66,7 +67,7 @@ public class Republica {
 				}
 			} while (linha != null);
 
-			UI.mensagem("Registros de Pessoa carregados do arquivo");
+			UI.mensagem("Registros de Pessoa carregados do arquivo","Arquivo");
 			buffer.close();
 
 		} catch (IOException e) {
@@ -180,7 +181,7 @@ public class Republica {
 					}
 				} while (linha != null);
 
-				UI.mensagem("Registros de Despesa carregados do arquivo");
+				UI.mensagem("Registros de Despesa carregados do arquivo","Arquivo");
 				buffer.close();
 
 			} catch (IOException e) {
@@ -200,6 +201,12 @@ public class Republica {
 			if (d.getValor() < 0) {
 				throw new ValorNaoInformadoException();
 			}
+
+			int sub = JOptionPane.showConfirmDialog(null, "Deseja cadastrar subcategoria?");
+			if(sub==0){
+				subcategoria.setNome(JOptionPane.showInputDialog("Qual a subcategoria?"));
+			}
+
 			listaDespesas.add(d);
 		}
 		catch(ValorNaoInformadoException e){

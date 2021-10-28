@@ -2,7 +2,7 @@ package entidades;
 
 public class Categoria {
 	
-	private String nome;
+	protected String nome;
 	
 	public Categoria (String nome) {
 		this.nome = nome;

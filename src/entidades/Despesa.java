@@ -6,6 +6,7 @@ public class Despesa {
 	Categoria categoria;
 	float valor;
 	
+	
 	public Despesa (String descricao, Categoria categoria, float valor) {
 		this.descricao = descricao;
 		this.valor = valor;

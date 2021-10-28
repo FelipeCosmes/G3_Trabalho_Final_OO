@@ -2,15 +2,18 @@ package entidades;
 
 public class SubCategoria extends Categoria {
 	
-	private Categoria superCategoria;
-	
-	public SubCategoria (String nome, Categoria superCategoria) {
+	public SubCategoria(String nome) {
 		super(nome);
-		this.superCategoria = superCategoria;
+		//TODO Auto-generated constructor stub
 	}
-	
-	public Categoria getCategoria() {
-		return superCategoria;
+
+	@Override
+	public String getNome(){
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 }

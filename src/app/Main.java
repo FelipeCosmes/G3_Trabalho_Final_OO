@@ -21,7 +21,7 @@ public class Main {
 						            + "4 - Excluir despesa \n" 
 						            + "5 - Calcular Divida \n"
 						            + "6 - Imprimir relatorio \n"
-						            + "9 - Mudar regra de calculo \n"
+						            + "7 - Mudar regra de calculo \n"
 						            + "0 - Sair";
 	
     public static void main(String[] args) {
@@ -175,8 +175,8 @@ public class Main {
             case 5:
             	p = UI.selecionar(republica.getListPessoas(), "Calcular Divida");
             	float divida = republica.calculoDivida.divida(p);
-            	UI.mensagem("A divida de " + p.getNome() + " e de R$ " + 
-            			String.format("%.2f", divida));
+            	UI.mensagem(p.getNome() + " deve R$ " + 
+            			String.format("%.2f", divida),"Divisão " + regra);
                 break;
                 
             case 6:
@@ -189,15 +189,15 @@ public class Main {
 					 * "\nDivida: " + republica.calculoDivida.divida(pessoa) + ".\n";
 					 */
 				}
-				msg += "\nDespesa total: R$ " + republica.calculoDivida.despesaTotal();
+				msg += String.format("\nDespesa total: R$ %.2f", republica.calculoDivida.despesaTotal());
 				if (republica.getListPessoas().size() == 0) {
 					UI.alerta("Lista vazia!", "Imprimir relatario");
 				} else {
-					UI.mensagem(msg);
+					UI.mensagem(msg,"Divisao " + regra);
 				}
 				break;
                 
-            case 9:
+            case 7:
             	regra = UI.selecionarRegra();
             	
             	if (regra == "Igualitaria") {

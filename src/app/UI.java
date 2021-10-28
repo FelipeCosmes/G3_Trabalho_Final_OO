@@ -30,7 +30,7 @@ public class UI {
         		"Divisao de despesa", JOptionPane.INFORMATION_MESSAGE, null, regra, regra[0]);
 	}
 	
-	//Metodo para selecionar o m�s
+	//Metodo para selecionar o mes
 	public static String selecionarMes() {
 		String[] opMes = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
         return (String) JOptionPane.showInputDialog(null, "Escolha o mes:", 
@@ -136,7 +136,7 @@ public class UI {
 				}
 			}
 			catch(DescricaoNaoInformadaException e){
-				JOptionPane.showMessageDialog(null, "Descricao contem somente letras e nao deve ser nula!!\n"+e);
+				JOptionPane.showMessageDialog(null, "Descricao contem somente letras e nao deve ser nula!\n"+e);
 				descricao = JOptionPane.showInputDialog("Descricao: ");
 				parseDescricao = false;
 			}
@@ -221,8 +221,8 @@ public class UI {
 	}
 	
 	// Metodo para mostrar uma mensagem
-	public static void mensagem(String msg) {
-		JOptionPane.showMessageDialog(null, msg);
+	public static void mensagem(String msg,String titulo) {
+		JOptionPane.showMessageDialog(null, msg,titulo,JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	// Metodos para mostrar uma alerta	
