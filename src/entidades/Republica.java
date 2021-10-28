@@ -24,7 +24,7 @@ public class Republica {
 	private List<Despesa> listaDespesas;
 	
 	public CalculoDivida calculoDivida;
-	public SubCategoria subcategoria;
+	public SubCategoria subcategoria = new SubCategoria();
 	
 	private String nomeArquivoPessoa = "alunos.txt";
 	private String strMes;

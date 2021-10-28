@@ -1,10 +1,16 @@
 package entidades;
 
 public class SubCategoria extends Categoria {
+
+	int a;
 	
 	public SubCategoria(String nome) {
 		super(nome);
 		//TODO Auto-generated constructor stub
+	}
+
+	public SubCategoria(){
+		
 	}
 
 	@Override
