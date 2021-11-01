@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import entidades.Categoria;
 import entidades.Despesa;
 import entidades.Pessoa;
+import entidades.SubCategoria;
 import exceptions.*;
 
 public class UI {
@@ -60,15 +61,11 @@ public class UI {
 		do {
 			try{
 				parseNome = true;
-				if(nome.isBlank()|| nome.matches(".*\\d.*")){
+				if(nome.isBlank()|| nome.matches("[a-zA-Z]")){
 					throw new DadosPessoaisIncompletosException();
 				}
 			}
 			catch(DadosPessoaisIncompletosException e){
-//				JOptionPane.showMessageDialog(null, "Valor de renda informado nao e um numero.\n"
-//						+ "Em seguida informe a renda novamente.");
-//				strRenda = JOptionPane.showInputDialog("Renda: ");
-//				parseRenda = false;
 				JOptionPane.showMessageDialog(null, "Digite apenas letras.\nNome nao pode ser nulo\n"+e);
 				nome = JOptionPane.showInputDialog("Nome: ");
 				parseNome = false;
@@ -131,7 +128,7 @@ public class UI {
 		do {
 			try{
 				parseDescricao = true;
-				if(descricao.isBlank()|| descricao.matches(".*\\d.*")){
+				if(descricao == null || descricao.isBlank() || descricao.matches("/[a-zA-Z]+/g")){
 					throw new DescricaoNaoInformadaException();
 				}
 			}
@@ -142,10 +139,12 @@ public class UI {
 			}
 		} while (!parseDescricao);
 
-		String strCat = JOptionPane.showInputDialog("Categoria: ");		do {
+		String strCat = JOptionPane.showInputDialog("Categoria: ");
+	
+		do {
 			try{
 				parseCategoria = true;
-				if(strCat.isBlank()|| strCat.matches(".*\\d.*")){
+				if(strCat.isBlank()|| strCat.matches("[a-zA-Z]")){
 					throw new CategoriaNaoInformadaException();
 				}
 			}
@@ -155,10 +154,29 @@ public class UI {
 				parseCategoria = false;
 			}
 		} while (!parseCategoria);
+
 		Categoria categoria = new Categoria(strCat);
+		int sub = JOptionPane.showConfirmDialog(null, "Deseja cadastrar subcategoria?");
+		if(sub==0) {
+  			String strSubCat = JOptionPane.showInputDialog("Sub-categoria: ");
+			do {
+				try{
+					parseCategoria = true;
+					if(strSubCat.isBlank()|| strSubCat.matches("[a-zA-Z]")){
+						throw new CategoriaNaoInformadaException();
+					}
+				}
+				catch(CategoriaNaoInformadaException e){
+					JOptionPane.showMessageDialog(null, "Sub-categoria contem somente letras e nao deve ser nula!!\n"+e);
+					strSubCat = JOptionPane.showInputDialog("Sub-categoria: ");
+					parseCategoria = false;
+				}
+			} while (!parseCategoria);
+	
+  			categoria = new SubCategoria(strSubCat, categoria);
+		}
 
-
-		//cadastro do valor
+		// cadastro do valor
 		String strValor = JOptionPane.showInputDialog("Valor: ");
 		float valor = 0;
 		do { 
