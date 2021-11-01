@@ -121,7 +121,7 @@ public class Republica {
 		listaPessoas.remove(resp);
 
 		// ----- Excluir de alunos.txt
-
+		/*
 		File fil = new File("alunos.txt");
 
 		try {
@@ -156,6 +156,7 @@ public class Republica {
 		} catch (IOException e) {
 			//TODO: handle exception
 		}
+		*/
 	}
 
 	// -----Leitura, Cadastro, GravaÃ§Ã£o e ExclusÃ£o de Despesas
@@ -260,7 +261,7 @@ public class Republica {
 		listaDespesas.remove(desp);
 
 		// ----- Excluir de despesas_<Mes>_<Ano>.txt
-
+		/*
 		File fil = new File("despesas_" + strMes + "_" + strAno + ".txt");
 
 		try {
@@ -294,7 +295,7 @@ public class Republica {
 
 		} catch (IOException e) {
 			// TODO: handle exception
-		}
+		}*/
 	}
 
 	// -------------------------------------------------------
