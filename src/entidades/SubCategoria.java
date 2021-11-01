@@ -1,25 +1,21 @@
 package entidades;
 
+import exceptions.CategoriaNaoInformadaException;
+
 public class SubCategoria extends Categoria {
 
-	int a;
-	
-	public SubCategoria(String nome) {
-		super(nome);
-		//TODO Auto-generated constructor stub
-	}
+	private Categoria superCategoria;
 
-	public SubCategoria(){
-		
-	}
+    public SubCategoria (String nome, Categoria superCategoria) {
+        super(nome);
+		if (nome.equals(null) || !nome.matches("^\\p{L}+[\\p{L}\\p{Z}\\p{P}]{0,}") || nome.isBlank()) {
+            throw new CategoriaNaoInformadaException();
+        }
+        this.superCategoria = superCategoria;
 
-	@Override
-	public String getNome(){
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    }
+	public Categoria getCategoria() {
+        return superCategoria;
+    }
 
 }
