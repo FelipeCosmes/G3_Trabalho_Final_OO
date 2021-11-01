@@ -144,8 +144,7 @@ public class Main {
         			UI.alerta("Dados pessoais invalidos. Tente novamente!");
         		} catch (RendimentoInvalidoException e) {
         			UI.alerta("Rendimento invalido. Tente novamente!");
-        		}
-                republica.gravarPessoas();
+        		}              
                 break;
                 
             case 2:
@@ -158,8 +157,7 @@ public class Main {
         			UI.alerta("Descricao nao informada. Tente novamente!");
         		} catch (ValorNaoInformadoException e) {
         			UI.alerta("Valor nao informado. Tente novamente!");
-        		}
-                republica.gravarDespesas();
+        		}               
                 break;
                 
             case 3:
@@ -215,6 +213,9 @@ public class Main {
                 break;
         	}
         } while (opcao != 0);
+	    
+	republica.gravarPessoas();
+	republica.gravarDespesas();
         
     }
 }
